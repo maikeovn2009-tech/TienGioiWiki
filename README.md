@@ -8,27 +8,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* New palette inspired by Chinese traditional colors */
-  --bg:        #1C1510;       /* very dark warm brown */
-  --bg-panel:  #231A12;       /* dark brown panel */
-  --bg-card:   #2B1F14;       /* card background */
-  --bg-card2:  #32251A;       /* secondary card */
-  --border:    #5C3D20;       /* warm brown border */
-  --border-2:  #8A5A2A;       /* brighter border */
-  --accent:    #C8602A;       /* 砖红 brick red */
-  --accent2:   #D4763A;       /* lighter brick */
-  --accent3:   #7AAA7A;       /* 蕉鹊 soft green */
-  --gold:      #D4A85A;       /* 唐茶 warm tan/gold */
-  --gold2:     #C09040;       /* darker gold */
-  --gold3:     #E8C070;       /* bright gold */
-  --red:       #C84040;       /* error red */
-  --green:     #5A9A6A;       /* success green */
+  --bg:        #1C1510;
+  --bg-panel:  #231A12;
+  --bg-card:   #2B1F14;
+  --bg-card2:  #32251A;
+  --border:    #5C3D20;
+  --border-2:  #8A5A2A;
+  --accent:    #C8602A;
+  --accent2:   #D4763A;
+  --accent3:   #7AAA7A;
+  --gold:      #D4A85A;
+  --gold2:     #C09040;
+  --gold3:     #E8C070;
+  --red:       #C84040;
+  --green:     #5A9A6A;
   --blue:      #4A7A9A;
   --purple:    #7A5A9A;
-  --text:      #F0E8D8;       /* 粉白 warm white */
-  --text-2:    #D8C8A8;       /* slightly warm */
-  --text-3:    #A89068;       /* mid tone */
-  --text-4:    #6A5040;       /* muted */
+  --text:      #F0E8D8;
+  --text-2:    #D8C8A8;
+  --text-3:    #A89068;
+  --text-4:    #6A5040;
   --shadow-sm: 0 1px 4px rgba(0,0,0,.4);
   --shadow:    0 4px 18px rgba(0,0,0,.5);
   --shadow-lg: 0 8px 32px rgba(0,0,0,.6);
@@ -54,7 +53,6 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-panel); }
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 2px; }
 
-/* ===== DECORATIVE PATTERNS ===== */
 .jade-border { border: 1px solid var(--border); position: relative; }
 .jade-border::before, .jade-border::after {
   content: ''; position: absolute; width: 8px; height: 8px;
@@ -63,7 +61,6 @@ body {
 .jade-border::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
 .jade-border::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-/* ===== HAMBURGER ===== */
 #hamburger {
   display: none;
   position: fixed; top: 11px; left: 14px; z-index: 300;
@@ -77,13 +74,11 @@ body {
 #hamburger.open span:nth-child(2) { opacity: 0; }
 #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* ===== SIDEBAR OVERLAY (mobile) ===== */
 #sidebarOverlay {
   display: none; position: fixed; inset: 0; z-index: 98;
   background: rgba(0,0,0,.5); backdrop-filter: blur(2px);
 }
 
-/* ===== SIDEBAR ===== */
 #sidebar {
   position: fixed; left:0; top:0; width: var(--sidebar-w); height:100vh;
   background: var(--bg-panel);
@@ -159,7 +154,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 }
 #exportBtn2:hover { color: var(--gold); border-color: var(--gold); }
 
-/* ===== MAIN ===== */
 #main { margin-left: var(--sidebar-w); min-height: 100vh; }
 #topbar {
   position: sticky; top:0; z-index:50;
@@ -175,7 +169,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .topbar-deco { display: flex; gap: 4px; align-items: center; }
 .topbar-deco span { width: 4px; height: 4px; background: var(--gold3); opacity: .5; transform: rotate(45deg); }
 
-/* ===== PAGES ===== */
 .page { display:none; padding: 28px 32px; }
 .page.active { display:block; }
 .page-header { margin-bottom: 24px; }
@@ -194,7 +187,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
   background: linear-gradient(90deg, var(--border-2), transparent);
 }
 
-/* ===== CARDS ===== */
 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 12px; margin-bottom: 18px; }
 .char-card {
   background: var(--bg-card); border: 1px solid var(--border);
@@ -229,7 +221,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .char-stars { font-size: 10px; color: #D4A82A; }
 .char-stars.s4 { color: #8060D0; }
 
-/* ===== FILTER BAR ===== */
 .filter-bar { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
 .filter-btn {
   padding: 5px 12px; background: var(--bg-card);
@@ -256,7 +247,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 }
 .view-btn.active { background: var(--accent); border-color: var(--accent); color: var(--text); }
 
-/* ===== ADD BUTTON ===== */
 .add-btn {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 7px 16px; background: var(--accent); color: var(--text);
@@ -267,14 +257,12 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .add-btn:hover { background: var(--accent2); box-shadow: var(--shadow); }
 .add-btn.hidden { display: none; }
 
-/* ===== TABLE ===== */
 .data-table { width:100%; border-collapse:collapse; background: var(--bg-card); overflow:hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
 .data-table th { text-align:left; padding:9px 12px; font-size:10px; color:var(--text-3); text-transform:uppercase; letter-spacing:1.5px; background:var(--bg-panel); border-bottom:1px solid var(--border); font-weight:700; }
 .data-table td { padding:9px 12px; font-size:12.5px; border-bottom:1px solid var(--border); color:var(--text); }
 .data-table tr:last-child td { border-bottom:none; }
 .data-table tr:hover td { background: var(--bg-card2); cursor:pointer; }
 
-/* ===== DETAIL PANEL ===== */
 #detailOverlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.6); backdrop-filter:blur(3px); }
 #detailPanel {
   display:none; position:fixed; top:0; right:0; height:100vh; width:680px;
@@ -308,7 +296,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .close-btn:hover { border-color: var(--red); color:var(--red); }
 .detail-content { padding: 20px 24px; }
 
-/* ===== SECTION CARDS ===== */
 .section-card {
   background: var(--bg-card); border: 1px solid var(--border);
   padding: 16px 18px; margin-bottom: 12px; position: relative;
@@ -356,7 +343,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .const-level { font-size:9px; color:var(--accent); font-weight:700; text-transform:uppercase; letter-spacing:1.5px; }
 .const-desc { font-size:12px; color:var(--text-2); margin-top:4px; line-height:1.6; }
 
-/* ===== MODAL ===== */
 #modal { display:none; position:fixed; inset:0; z-index:300; background:rgba(0,0,0,.65); backdrop-filter:blur(5px); overflow-y:auto; padding:36px 18px; }
 .modal-box {
   max-width:840px; margin:0 auto;
@@ -380,7 +366,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .modal-body { padding:22px; max-height:74vh; overflow-y:auto; }
 .modal-footer { padding:12px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:9px; background:var(--bg-panel); }
 
-/* ===== FORMS ===== */
 .form-section { margin-bottom:20px; }
 .form-section-title {
   font-size:10px; text-transform:uppercase; letter-spacing:2.5px;
@@ -408,13 +393,17 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
   width:100%; height:110px; background:var(--bg-panel); border:1px dashed var(--border-2);
   border-radius:var(--radius); display:flex; align-items:center; justify-content:center;
   cursor:pointer; overflow:hidden; transition:border-color .2s;
-  font-size:11px; color:var(--text-4); font-style:italic;
+  font-size:11px; color:var(--text-4); font-style:italic; flex-direction:column; gap:4px;
 }
 .img-preview:hover { border-color:var(--accent); }
 .img-preview img { width:100%; height:100%; object-fit:cover; }
 .img-upload-input { display:none; }
+/* Storage warning */
+.storage-bar-wrap { margin-bottom:10px; }
+.storage-bar-bg { background:var(--bg-card); border:1px solid var(--border); border-radius:2px; height:6px; overflow:hidden; }
+.storage-bar-fill { height:100%; background:var(--accent); transition:width .3s; }
+.storage-bar-label { font-size:10px; color:var(--text-4); margin-top:3px; }
 
-/* ===== BUTTONS ===== */
 .btn { padding:7px 16px; border-radius:var(--radius); cursor:pointer; font-size:12.5px; font-family:'Mulish',sans-serif; font-weight:600; transition:all .2s; border:1px solid; }
 .btn-primary { background:var(--accent); border-color:var(--accent); color:var(--text); }
 .btn-primary:hover { background:var(--accent2); border-color:var(--accent2); }
@@ -423,7 +412,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .btn-ghost { background:transparent; border-color:var(--border); color:var(--text-3); }
 .btn-ghost:hover { border-color:var(--border-2); color:var(--text-2); }
 
-/* ===== HOME ===== */
 .home-hero {
   background: var(--bg-card); border:1px solid var(--border);
   padding:32px 36px; margin-bottom:22px;
@@ -466,7 +454,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .home-section-title { font-family:'Noto Serif SC',serif; font-size:15px; font-weight:700; color:var(--gold3); margin-bottom:3px; }
 .home-section-desc { font-size:11.5px; color:var(--text-3); }
 
-/* ===== INFO SECTION ===== */
 .info-section { background:var(--bg-card); border:1px solid var(--border); padding:18px; margin-bottom:14px; }
 .info-section h3 { font-family:'Noto Serif SC',serif; font-size:16px; font-weight:700; color:var(--gold3); margin-bottom:12px; letter-spacing:1px; }
 .info-text { font-size:13px; color:var(--text-2); line-height:1.8; }
@@ -475,7 +462,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .info-table td { padding:7px 11px; border:1px solid var(--border); color:var(--text-2); }
 .info-table tr:hover td { background:var(--bg-card2); }
 
-/* ===== REACTION ===== */
 .reaction-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
 .reaction-card { background:var(--bg-card); border:1px solid var(--border); padding:13px; transition:all .2s; cursor:default; }
 .reaction-card:hover { border-color:var(--accent3); box-shadow:var(--shadow-sm); }
@@ -484,7 +470,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .reaction-effect { font-size:11.5px; color:var(--text-2); line-height:1.65; }
 .reaction-filter-bar { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
 
-/* ===== GEO ===== */
 .geo-continent { background:var(--bg-card); border:1px solid var(--border); margin-bottom:12px; overflow:hidden; }
 .geo-continent-header { padding:12px 16px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; background:var(--bg-panel); border-bottom:1px solid var(--border); }
 .geo-continent-name { font-family:'Noto Serif SC',serif; font-size:16px; font-weight:700; color:var(--gold3); letter-spacing:1px; }
@@ -493,7 +478,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .force-name { font-size:13px; font-weight:700; color:var(--text); }
 .force-desc { font-size:12px; color:var(--text-2); margin-top:3px; }
 
-/* ===== ITEM CARD ===== */
 .item-card { background:var(--bg-card); border:1px solid var(--border); cursor:pointer; transition:all .2s; overflow:hidden; }
 .item-card:hover { border-color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow); }
 .item-card-img { height:88px; background:var(--bg-card2); display:flex; align-items:center; justify-content:center; overflow:hidden; }
@@ -512,7 +496,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .pham-thuong { background:rgba(74,100,200,.12); color:#7A9AE0; border:1px solid rgba(74,100,200,.3); }
 .pham-cuc    { background:rgba(180,80,200,.12); color:#D070E0; border:1px solid rgba(180,80,200,.3); }
 
-/* ===== TIMELINE ===== */
 .timeline-wrap { position:relative; padding-left:28px; }
 .timeline-wrap::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:1px; background:repeating-linear-gradient(180deg,var(--border-2) 0,var(--border-2) 6px,transparent 6px,transparent 12px); }
 .timeline-item { position:relative; margin-bottom:18px; }
@@ -523,7 +506,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .timeline-title { font-family:'Noto Serif SC',serif; font-size:15px; font-weight:700; color:var(--gold3); margin-bottom:4px; }
 .timeline-desc { font-size:11.5px; color:var(--text-2); line-height:1.7; }
 
-/* ===== PASS MODAL ===== */
 #passModal { display:none; position:fixed; inset:0; z-index:500; background:rgba(0,0,0,.75); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
 .pass-box { background:var(--bg); border:1px solid var(--border-2); padding:28px; width:320px; text-align:center; box-shadow:var(--shadow-lg); position:relative; }
 .pass-box::before, .pass-box::after { content:''; position:absolute; width:10px; height:10px; border-color:var(--gold3); border-style:solid; }
@@ -534,19 +516,19 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .pass-input { width:100%; text-align:center; letter-spacing:4px; font-size:15px; margin-bottom:14px; }
 .pass-error { color:var(--red); font-size:11px; margin-bottom:7px; min-height:16px; }
 
-/* ===== TOAST ===== */
 .toast {
   position:fixed; bottom:22px; right:22px; z-index:999;
   padding:10px 16px; background:var(--bg-card); border:1px solid var(--border);
   font-size:12.5px; color:var(--text);
   box-shadow:var(--shadow); animation:toastIn .3s ease;
   display:flex; align-items:center; gap:9px; font-weight:500;
+  max-width: calc(100vw - 44px);
 }
 @keyframes toastIn { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
 .toast.success { border-color:var(--green); }
 .toast.error { border-color:var(--red); }
+.toast.warning { border-color:var(--gold); }
 
-/* ===== NAV BADGE ===== */
 .nav-add-badge {
   margin-left:auto; font-size:9px; padding:1px 6px; border-radius:2px;
   background:rgba(200,96,42,.2); color:var(--accent); font-weight:700;
@@ -554,7 +536,6 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 }
 body.edit-mode .nav-add-badge { display:inline-block; }
 
-/* ===== CHAR DETAIL HERO ===== */
 .char-detail-hero {
   display:flex; gap:18px; margin-bottom:18px; align-items:flex-start;
   padding:18px; background:var(--bg-card); border:1px solid var(--border);
@@ -574,112 +555,65 @@ body.edit-mode .nav-add-badge { display:inline-block; }
 .tag { font-size:10px; padding:2px 9px; border-radius:2px; border:1px solid var(--border); color:var(--text-2); background:var(--bg-panel); font-weight:600; }
 .tag.gold { border-color:rgba(212,168,90,.4); color:var(--gold3); background:rgba(212,168,90,.08); }
 
-/* ===== EMPTY STATE ===== */
 .empty-state { text-align:center; padding:55px; color:var(--text-4); }
 .empty-state-title { font-size:13px; margin-top:10px; font-style:italic; }
 
-/* ===== VOICE LINES ===== */
 .voice-line { background:var(--bg-card2); border-left:3px solid var(--accent3); padding:9px 13px; margin-bottom:7px; }
 .voice-label { font-size:9px; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent3); font-weight:700; margin-bottom:2px; }
 .voice-text { font-size:12.5px; color:var(--text-2); font-style:italic; line-height:1.65; }
 
-/* ===== CHECKBOX GROUP ===== */
-.checkbox-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
-.checkbox-item { display:flex; align-items:center; gap:4px; cursor:pointer; }
-.checkbox-item input { accent-color: var(--accent); cursor:pointer; }
-.checkbox-item label { font-size:12px; color:var(--text-2); cursor:pointer; }
-
-/* ===== STORY SECTION ===== */
 .story-block { background:var(--bg-card2); border:1px solid var(--border); border-left:3px solid var(--gold); padding:12px 14px; margin-bottom:9px; }
 .story-block-title { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--gold3); font-weight:700; margin-bottom:6px; }
 .story-block-content { font-size:12.5px; color:var(--text-2); line-height:1.8; }
 
-/* ===== RARITY COLORS ===== */
-.weapon-5star { color:#D4A82A; font-weight:700; }
-.weapon-4star { color:#8060D0; font-weight:700; }
-.weapon-3star { color:#4A78C0; font-weight:700; }
-
-/* ===== WEAPON GROUP BADGE ===== */
 .weapon-group-tag { font-size:10px; padding:2px 8px; border-radius:2px; background:rgba(122,170,122,.12); color:var(--accent3); border:1px solid rgba(122,170,122,.3); font-weight:700; }
 
-/* ===== TABLE MOBILE SCROLL ===== */
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-/* ===== RESPONSIVE — MOBILE ===== */
 @media (max-width: 768px) {
   #hamburger { display: flex; }
-
-  #sidebar {
-    transform: translateX(-100%);
-    width: min(var(--sidebar-w), 80vw);
-  }
+  #sidebar { transform: translateX(-100%); width: min(var(--sidebar-w), 80vw); }
   #sidebar.open { transform: translateX(0); }
   #sidebarOverlay.open { display: block; }
-
   #main { margin-left: 0; }
-
   #topbar { padding: 11px 16px 11px 60px; }
   .topbar-title { font-size: 13px; letter-spacing: 1px; }
-
   .page { padding: 16px; }
-
   .page-title { font-size: 20px; }
-
   .home-hero { padding: 20px; }
   .home-hero-title { font-size: 22px; }
   .home-hero-sub { font-size: 12px; }
-
   .home-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .home-stat-num { font-size: 22px; }
-
   .home-sections { grid-template-columns: 1fr 1fr; gap: 8px; }
   .home-section-title { font-size: 13px; }
   .home-section-desc { font-size: 10px; }
-
   .cards-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
-
   .filter-bar { gap: 5px; }
   .filter-btn { padding: 4px 9px; font-size: 11px; }
   .search-box { min-width: 120px; font-size: 12px; }
   .view-toggle { margin-left: 0 !important; }
-
-  /* Detail panel full screen on mobile */
   #detailPanel { width: 100vw; }
-
-  /* Modal full width on mobile */
   #modal { padding: 12px 8px; }
   .modal-box { max-width: 100%; }
   .modal-body { max-height: 65vh; padding: 14px; }
-
   .form-grid { grid-template-columns: 1fr; }
   .form-grid.cols3 { grid-template-columns: 1fr; }
   .form-group.full { grid-column: 1; }
-
   .field-grid { grid-template-columns: 1fr; }
   .field-grid.cols3 { grid-template-columns: 1fr; }
-
   .constellation-grid { grid-template-columns: 1fr; }
-
   .char-detail-hero { flex-direction: column; }
   .char-detail-avatar { width: 80px; height: 80px; }
-
   .data-table { font-size: 11px; }
   .data-table th, .data-table td { padding: 7px 8px; }
-
-  /* Hide some table columns on very small screens */
-  .data-table th:nth-child(n+5),
-  .data-table td:nth-child(n+5) { display: none; }
-
+  .data-table th:nth-child(n+5), .data-table td:nth-child(n+5) { display: none; }
   .reaction-grid { grid-template-columns: 1fr; }
-
   .pass-box { width: 90vw; padding: 20px; }
-
   .info-table { font-size: 11px; }
   .info-table th, .info-table td { padding: 5px 8px; }
-
   .toast { bottom: 12px; right: 12px; left: 12px; font-size: 12px; }
 }
-
 @media (max-width: 480px) {
   .home-sections { grid-template-columns: 1fr; }
   .home-stats { grid-template-columns: repeat(2, 1fr); }
@@ -689,13 +623,11 @@ body.edit-mode .nav-add-badge { display:inline-block; }
 </head>
 <body>
 
-<!-- HAMBURGER (mobile) -->
 <div id="hamburger" onclick="toggleSidebar()">
   <span></span><span></span><span></span>
 </div>
 <div id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-<!-- SIDEBAR -->
 <div id="sidebar">
   <div class="sidebar-logo">
     <div class="sidebar-logo-title">仙界&nbsp;起源</div>
@@ -732,6 +664,10 @@ body.edit-mode .nav-add-badge { display:inline-block; }
     <div class="nav-item" data-page="custom-sections">Nhánh tùy chỉnh</div>
   </nav>
   <div class="sidebar-footer">
+    <div class="storage-bar-wrap" id="storageBarWrap" style="display:none">
+      <div class="storage-bar-bg"><div class="storage-bar-fill" id="storageBarFill" style="width:0%"></div></div>
+      <div class="storage-bar-label" id="storageBarLabel"></div>
+    </div>
     <button id="editModeBtn" onclick="toggleEditMode()">
       <span class="edit-dot"></span>
       <span id="editBtnText">Chế độ chỉnh sửa</span>
@@ -740,7 +676,6 @@ body.edit-mode .nav-add-badge { display:inline-block; }
   </div>
 </div>
 
-<!-- MAIN -->
 <div id="main">
   <div id="topbar">
     <span class="topbar-title" id="topbarTitle">Trang chủ</span>
@@ -881,21 +816,6 @@ body.edit-mode .nav-add-badge { display:inline-block; }
           <tr><td>Nhạc khí linh</td><td>Điều khiển tình cảm & trạng thái</td></tr>
         </tbody>
       </table>
-      </div>
-      <div style="margin-top:14px">
-        <h3>Phân cấp</h3>
-        <div class="table-scroll">
-        <table class="info-table">
-          <thead><tr><th>Cấp</th><th>Tên</th><th>Ghi chú</th></tr></thead>
-          <tbody>
-            <tr><td>1 sao</td><td>Phàm khí</td><td>Cấp thấp nhất</td></tr>
-            <tr><td>2 sao</td><td>Linh khí</td><td>Có thể tự luyện</td></tr>
-            <tr><td>3 sao</td><td>Địa khí</td><td>Có thể tự luyện</td></tr>
-            <tr><td>4 sao</td><td>Tiên khí</td><td>Cần điều kiện đặc biệt</td></tr>
-            <tr><td>5 sao</td><td style="color:var(--gold3);font-weight:700">Thần khí</td><td>Hiếm nhất — Bản Mệnh Pháp Bảo</td></tr>
-          </tbody>
-        </table>
-        </div>
       </div>
     </div>
   </div>
@@ -1091,27 +1011,92 @@ const WEAPON_GROUPS = {
   'LINH BẢO': ['Gương linh / Ngọc bội','Bài / Thẻ bài','Nhạc khí linh']
 };
 
-// ===== DB =====
-let DB = JSON.parse(localStorage.getItem('tiengioi_db_v3') || 'null') || {
+// ===== IMAGE COMPRESSION — FIX #1: Nén ảnh để tiết kiệm bộ nhớ =====
+// Ảnh gốc quá lớn -> nén xuống max 400px, quality 0.75 để tránh đầy localStorage
+function compressImage(file, callback) {
+  const maxSize = 400; // px
+  const quality = 0.75;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      let w = img.width, h = img.height;
+      if (w > maxSize || h > maxSize) {
+        if (w > h) { h = Math.round(h * maxSize / w); w = maxSize; }
+        else       { w = Math.round(w * maxSize / h); h = maxSize; }
+      }
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      callback(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ===== DB — FIX #2: Đọc DB an toàn, không crash nếu lỗi =====
+let DB = (function() {
+  try {
+    const raw = localStorage.getItem('tiengioi_db_v3');
+    if (raw) return JSON.parse(raw);
+  } catch(e) { console.warn('DB parse error:', e); }
+  return null;
+})() || {
   characters:[], weapons:[], artifacts:[], herbs:[], minerals:[], drops:[], pills:[],
   geography:[], timeline:[], customSections:[], customReactions:[],
   pass: '1900100biet'
 };
+
+// Đảm bảo các mảng luôn tồn tại
+['characters','weapons','artifacts','herbs','minerals','drops','pills',
+ 'geography','timeline','customSections','customReactions'].forEach(k => {
+  if (!Array.isArray(DB[k])) DB[k] = [];
+});
+
 let editMode = false;
 let currentPage = 'home';
 let currentDetailItem = null;
 let currentDetailType = null;
 let charFilter = 'all';
 let charView = 'grid';
-let itemFilters = {};
 let weaponGroupFilter = 'all';
 let reactionElementFilter = 'all';
 let modalType = null;
 let modalEditItem = null;
 
+// ===== FIX #3: Lưu DB với xử lý lỗi đầy bộ nhớ =====
 function save() {
-  localStorage.setItem('tiengioi_db_v3', JSON.stringify(DB));
-  updateStats();
+  try {
+    localStorage.setItem('tiengioi_db_v3', JSON.stringify(DB));
+    updateStats();
+    updateStorageBar();
+  } catch(e) {
+    if (e.name === 'QuotaExceededError' || e.code === 22) {
+      showToast('⚠ Bộ nhớ gần đầy! Hãy xóa bớt ảnh hoặc xuất file HTML để backup.', 'warning');
+    } else {
+      showToast('Lỗi khi lưu: ' + e.message, 'error');
+    }
+  }
+}
+
+// ===== Hiển thị thanh bộ nhớ =====
+function updateStorageBar() {
+  try {
+    const used = new Blob([localStorage.getItem('tiengioi_db_v3')||'']).size;
+    const max = 5 * 1024 * 1024; // 5MB
+    const pct = Math.min(100, Math.round(used / max * 100));
+    const wrap = document.getElementById('storageBarWrap');
+    const fill = document.getElementById('storageBarFill');
+    const label = document.getElementById('storageBarLabel');
+    if (wrap) wrap.style.display = 'block';
+    if (fill) {
+      fill.style.width = pct + '%';
+      fill.style.background = pct > 80 ? 'var(--red)' : pct > 60 ? 'var(--gold)' : 'var(--accent3)';
+    }
+    if (label) label.textContent = `Bộ nhớ: ${(used/1024).toFixed(0)}KB / 5120KB (${pct}%)`;
+  } catch(e) {}
 }
 
 function updateStats() {
@@ -1198,29 +1183,42 @@ function updateEditUI() {
   renderPage(currentPage);
 }
 
-// ===== IMAGE UPLOAD =====
-function handleImageUpload(file, callback) {
-  const reader = new FileReader();
-  reader.onload = e => callback(e.target.result);
-  reader.readAsDataURL(file);
-}
+// ===== FIX #4: Upload ảnh dùng compressImage thay vì đọc thẳng base64 =====
 function makeImageUpload(id, currentSrc) {
   return `
     <div class="img-upload-wrap">
       <div class="img-preview" id="prev_${id}" onclick="document.getElementById('file_${id}').click()">
-        ${currentSrc ? `<img src="${currentSrc}" id="previewImg_${id}">` : `<span class="placeholder-text">Nhấn để chọn ảnh</span>`}
+        ${currentSrc
+          ? `<img src="${currentSrc}" id="previewImg_${id}">`
+          : `<span>📷</span><span class="placeholder-text">Nhấn để chọn ảnh</span>`}
       </div>
       <input type="file" accept="image/*" class="img-upload-input" id="file_${id}" onchange="previewUpload('${id}')">
-      <input type="hidden" id="f_${id}" value="${currentSrc || ''}">
+      <input type="hidden" id="f_${id}" value="${currentSrc ? escAttr(currentSrc) : ''}">
     </div>`;
 }
+
+function escAttr(s) {
+  // Ảnh base64 không cần escape attr vì nằm trong hidden input value, dùng attribute thường là OK
+  // Nhưng để an toàn ta không để value lớn trong HTML attr, dùng dataset
+  return ''; // value sẽ được set bằng JS sau
+}
+
+// Override: sau khi render modal có ảnh, cần set lại value của hidden input
+function setImageValues(fields) {
+  fields.forEach(([id, src]) => {
+    const el = document.getElementById('f_' + id);
+    if (el && src) el.value = src;
+  });
+}
+
 function previewUpload(id) {
   const file = document.getElementById('file_' + id)?.files[0];
   if (!file) return;
-  handleImageUpload(file, src => {
-    document.getElementById('f_' + id).value = src;
+  compressImage(file, src => {
+    const hiddenEl = document.getElementById('f_' + id);
+    if (hiddenEl) hiddenEl.value = src;
     const prev = document.getElementById('prev_' + id);
-    prev.innerHTML = `<img src="${src}">`;
+    if (prev) prev.innerHTML = `<img src="${src}">`;
   });
 }
 
@@ -1251,7 +1249,7 @@ function renderChars() {
     card.className = 'char-card'; card.onclick = () => openCharDetail(c);
     card.innerHTML = `
       <div class="char-card-img">
-        ${c.image ? `<img src="${c.image}" alt="${c.name}">` : `<span class="placeholder-text">Chưa có ảnh</span>`}
+        ${c.image ? `<img src="${c.image}" alt="${c.name||''}">` : `<span class="placeholder-text">Chưa có ảnh</span>`}
       </div>
       <div class="rarity-bar ${c.stars==5?'rarity-5':c.stars==4?'rarity-4':'rarity-3'}"></div>
       <div class="char-card-info">
@@ -1308,7 +1306,7 @@ function renderItems(type) {
     const pham = getPhamBadge(it.pham);
     card.innerHTML = `
       <div class="item-card-img">
-        ${it.image ? `<img src="${it.image}" alt="${it.name}">` : `<span class="placeholder-text">Chưa có ảnh</span>`}
+        ${it.image ? `<img src="${it.image}" alt="${it.name||''}">` : `<span class="placeholder-text">Chưa có ảnh</span>`}
       </div>
       <div class="item-card-body">
         <div class="item-card-name">${it.name||'???'}</div>
@@ -1458,7 +1456,7 @@ function renderTimeline() {
   if (sorted.length===0) { empty.style.display='block'; return; }
   empty.style.display='none';
   const wrap = document.createElement('div'); wrap.className='timeline-wrap';
-  sorted.forEach((ev, i) => {
+  sorted.forEach((ev) => {
     const realIdx = DB.timeline.indexOf(ev);
     const div = document.createElement('div'); div.className='timeline-item';
     div.innerHTML = `
@@ -1526,6 +1524,7 @@ function toggleCustom(i) {
 }
 function deleteCustomSection(i){if(confirm('Xóa toàn bộ nhánh này?')){DB.customSections.splice(i,1);save();renderCustomSections();}}
 function deleteCustomEntry(si,ei){DB.customSections[si].entries.splice(ei,1);save();renderCustomSections();}
+
 function openCustomEntryDetail(si,ei){
   const e = DB.customSections[si].entries[ei];
   const sec = DB.customSections[si];
@@ -1562,7 +1561,7 @@ function openCharDetail(c) {
   let html = `
     <div class="char-detail-hero">
       <div class="char-detail-avatar">
-        ${c.image?`<img src="${c.image}" alt="${c.name}">`:`<span class="placeholder-text">Chưa có ảnh</span>`}
+        ${c.image?`<img src="${c.image}" alt="${c.name||''}">`:`<span class="placeholder-text">Chưa có ảnh</span>`}
       </div>
       <div style="flex:1;min-width:0">
         <div class="char-detail-name">${c.name||'???'}</div>
@@ -1771,8 +1770,15 @@ function updateWeaponSubtypes() {
   const opts = WEAPON_GROUPS[grp]||[];
   sub.innerHTML=`<option value="">—</option>`+opts.map(o=>`<option>${o}</option>`).join('');
 }
+function updateItemWeaponSubtypes() {
+  const grp = document.getElementById('f_weaponGroup')?.value||'';
+  const sub = document.getElementById('f_weaponSubtype');
+  if(!sub) return;
+  const opts = WEAPON_GROUPS[grp]||[];
+  sub.innerHTML=`<option value="">—</option>`+opts.map(o=>`<option>${o}</option>`).join('');
+}
 
-// ===== OPEN CHAR MODAL =====
+// ===== OPEN CHAR MODAL — FIX #5: set ảnh sau khi render HTML =====
 function openCharModal(edit) {
   if(!editMode) return;
   modalType='character'; modalEditItem=edit||null;
@@ -1784,8 +1790,8 @@ function openCharModal(edit) {
     <div class="form-section">
       <div class="form-section-title">01 — Hình ảnh</div>
       <div class="form-grid">
-        <div class="form-group"><label class="form-label">Ảnh đại diện (1:1)</label>${makeImageUpload('image', c.image)}</div>
-        <div class="form-group"><label class="form-label">Ảnh full body / banner</label>${makeImageUpload('banner', c.banner)}</div>
+        <div class="form-group"><label class="form-label">Ảnh đại diện (1:1)</label>${makeImageUpload('image', null)}</div>
+        <div class="form-group"><label class="form-label">Ảnh full body / banner</label>${makeImageUpload('banner', null)}</div>
       </div>
     </div>
     <div class="form-section">
@@ -1992,18 +1998,8 @@ function openCharModal(edit) {
     <div class="form-section">
       <div class="form-section-title">12 — Thoại đặc trưng (Voice Lines)</div>
       <div class="form-grid">
-        <div class="form-group full"><label class="form-label">Chào hỏi lần đầu</label><input class="form-input" id="f_voiceGreet" value="${c.voiceGreet||''}"></div>
-        <div class="form-group full"><label class="form-label">Giới thiệu bản thân</label><input class="form-input" id="f_voiceIntro" value="${c.voiceIntro||''}"></div>
-        <div class="form-group full"><label class="form-label">Khi thêm vào đội</label><input class="form-input" id="f_voiceJoin" value="${c.voiceJoin||''}"></div>
-        <div class="form-group full"><label class="form-label">Khi đột phá cảnh giới</label><input class="form-input" id="f_voiceBreakthrough" value="${c.voiceBreakthrough||''}"></div>
-        <div class="form-group full"><label class="form-label">Khi HP thấp</label><input class="form-input" id="f_voiceLowHP" value="${c.voiceLowHP||''}"></div>
-        <div class="form-group full"><label class="form-label">Khi bị đánh bại</label><input class="form-input" id="f_voiceDefeated" value="${c.voiceDefeated||''}"></div>
-        <div class="form-group full"><label class="form-label">Khi dùng kỹ năng E</label><input class="form-input" id="f_voiceSkillE" value="${c.voiceSkillE||''}"></div>
-        <div class="form-group full"><label class="form-label">Khi dùng tuyệt kỹ Q</label><input class="form-input" id="f_voiceSkillQ" value="${c.voiceSkillQ||''}"></div>
-        <div class="form-group full"><label class="form-label">Khi bạo kích liên tiếp</label><input class="form-input" id="f_voiceCrit" value="${c.voiceCrit||''}"></div>
-        <div class="form-group full"><label class="form-label">Về bản thân</label><input class="form-input" id="f_voiceSelf" value="${c.voiceSelf||''}"></div>
-        <div class="form-group full"><label class="form-label">Về thế giới / thời thế</label><input class="form-input" id="f_voiceWorld" value="${c.voiceWorld||''}"></div>
-        <div class="form-group full"><label class="form-label">Về nhân vật quan trọng nhất</label><input class="form-input" id="f_voiceKey" value="${c.voiceKey||''}"></div>
+        ${['voiceGreet','voiceIntro','voiceJoin','voiceBreakthrough','voiceLowHP','voiceDefeated','voiceSkillE','voiceSkillQ','voiceCrit','voiceSelf','voiceWorld','voiceKey'].map((k,i)=>`
+        <div class="form-group full"><label class="form-label">${['Chào hỏi lần đầu','Giới thiệu bản thân','Khi thêm vào đội','Khi đột phá cảnh giới','Khi HP thấp','Khi bị đánh bại','Khi dùng kỹ năng E','Khi dùng tuyệt kỹ Q','Khi bạo kích liên tiếp','Về bản thân','Về thế giới / thời thế','Về nhân vật quan trọng nhất'][i]}</label><input class="form-input" id="f_${k}" value="${c[k]||''}"></div>`).join('')}
       </div>
     </div>
     <div class="form-section">
@@ -2023,6 +2019,10 @@ function openCharModal(edit) {
         <div class="form-group full"><label class="form-label">Ghi chú thiết kế tự do</label><textarea class="form-textarea" id="f_notes">${c.notes||''}</textarea></div>
       </div>
     </div>`;
+
+  // Set ảnh hiện có vào hidden input SAU khi render HTML (tránh crash do value quá lớn trong template literal)
+  if (c.image) { const el = document.getElementById('f_image'); if(el) { el.value = c.image; document.getElementById('prev_image').innerHTML = `<img src="${c.image}">`; } }
+  if (c.banner) { const el = document.getElementById('f_banner'); if(el) { el.value = c.banner; document.getElementById('prev_banner').innerHTML = `<img src="${c.banner}">`; } }
 }
 
 // ===== OPEN ITEM MODAL =====
@@ -2039,7 +2039,7 @@ function openItemModal(type, edit) {
 
   let body=`
     <div class="form-section"><div class="form-section-title">Hình ảnh</div>
-      <div class="form-group">${makeImageUpload('image', it.image)}</div>
+      <div class="form-group">${makeImageUpload('image', null)}</div>
     </div>
     <div class="form-section"><div class="form-section-title">Thông tin cơ bản</div>
     <div class="form-grid">
@@ -2091,14 +2091,12 @@ function openItemModal(type, edit) {
     <div class="form-group full"><label class="form-label">Ghi chú</label><textarea class="form-textarea" id="f_notes">${it.notes||''}</textarea></div>
     </div></div>`;
   document.getElementById('modalBody').innerHTML=body;
-}
 
-function updateItemWeaponSubtypes() {
-  const grp = document.getElementById('f_weaponGroup')?.value||'';
-  const sub = document.getElementById('f_weaponSubtype');
-  if(!sub) return;
-  const opts = WEAPON_GROUPS[grp]||[];
-  sub.innerHTML=`<option value="">—</option>`+opts.map(o=>`<option>${o}</option>`).join('');
+  // Set ảnh hiện có sau khi render
+  if (it.image) {
+    const el = document.getElementById('f_image'); if(el) el.value = it.image;
+    const prev = document.getElementById('prev_image'); if(prev) prev.innerHTML = `<img src="${it.image}">`;
+  }
 }
 
 function openGeoModal() {
@@ -2145,17 +2143,20 @@ function openCustomSectionModal() {
     </div></div>`;
 }
 
+// ===== FIX #6: openCustomEntryModal — sửa lỗi si không được truyền đúng =====
 function openCustomEntryModal(si, ei) {
   if(!editMode) return;
-  const edit = ei!==undefined ? DB.customSections[si].entries[ei] : null;
-  modalType='customEntry'; modalEditItem=edit?{si,ei,item:edit}:{si};
+  const edit = (ei !== undefined && ei !== null) ? DB.customSections[si].entries[ei] : null;
+  // Lưu si dưới dạng number rõ ràng
+  modalType='customEntry';
+  modalEditItem = { si: Number(si), ei: (ei !== undefined && ei !== null) ? Number(ei) : null, item: edit };
   document.getElementById('modal').style.display='block';
   const secName=DB.customSections[si].name;
   document.getElementById('modalTitle').textContent=(edit?'Chỉnh sửa':'Thêm')+' mục vào "'+secName+'"';
   const e=edit||{};
   document.getElementById('modalBody').innerHTML=`
     <div class="form-section"><div class="form-section-title">Hình ảnh (tùy chọn)</div>
-      <div class="form-group">${makeImageUpload('image', e.image)}</div>
+      <div class="form-group">${makeImageUpload('image', null)}</div>
     </div>
     <div class="form-section"><div class="form-section-title">Nội dung</div>
     <div class="form-grid">
@@ -2164,16 +2165,22 @@ function openCustomEntryModal(si, ei) {
       <div class="form-group full"><label class="form-label">Nội dung chi tiết</label><textarea class="form-textarea" style="min-height:150px" id="f_content">${e.content||''}</textarea></div>
       <div class="form-group full"><label class="form-label">Ghi chú</label><input class="form-input" id="f_notes" value="${e.notes||''}"></div>
     </div></div>`;
+  if (e.image) {
+    const el = document.getElementById('f_image'); if(el) el.value = e.image;
+    const prev = document.getElementById('prev_image'); if(prev) prev.innerHTML = `<img src="${e.image}">`;
+  }
 }
 
-// ===== SAVE MODAL =====
+// ===== SAVE MODAL — FIX #7: Sửa toàn bộ logic lưu, đặc biệt customEntry =====
 function saveModal() {
-  const name = document.getElementById('f_name')?.value?.trim();
-  if(!name && modalType!=='timeline') { showToast('Vui lòng nhập tên!','error'); return; }
+  const nameEl = document.getElementById('f_name');
+  const name = nameEl?.value?.trim() || '';
 
   if(modalType==='character'){
-    const c = modalEditItem || {};
-    ['name','title','realName','alias','rank','gender','race','clan','world','hometown','age','ageAppear','patch','createdAt',
+    // Lấy object hiện có hoặc tạo mới
+    const isNew = !modalEditItem;
+    const c = isNew ? {} : modalEditItem;
+    const fields = ['name','title','realName','alias','rank','gender','race','clan','world','hometown','age','ageAppear','patch','createdAt',
      'hairColor','eyeColor','height','clothing','markings','items','voiceType','aura',
      'element','elementColor','elementShape','cultivation','faction','master','secretArt','role','fightStyle',
      'weaponGroup','weaponSubtype','weaponName','realm','bonusStat',
@@ -2189,65 +2196,86 @@ function saveModal() {
      'voiceSkillE','voiceSkillQ','voiceCrit','voiceSelf','voiceWorld','voiceKey',
      'uniqueAbilityName','uniqueCondition','uniqueAbility',
      'mat1','mat2','mat3','skillMat1','skillMat2','skillMat3',
-     'artifactSet1','artifactSet2','notes','image','banner'
-    ].forEach(f=>{const el=document.getElementById('f_'+f);if(el)c[f]=el.value;});
+     'artifactSet1','artifactSet2','notes','image','banner'];
+    fields.forEach(f=>{ const el=document.getElementById('f_'+f); if(el) c[f]=el.value; });
     c.stars=parseInt(document.getElementById('f_stars')?.value||'5');
-    if(!modalEditItem) DB.characters.push(c);
+    if(!c.name){showToast('Vui lòng nhập tên nhân vật!','error');return;}
+    if(isNew) DB.characters.push(c);
     save(); closeModal(); renderChars();
+    showToast('Đã lưu nhân vật thành công!','success');
 
   } else if(modalType==='reaction'){
-    DB.customReactions=DB.customReactions||[];
+    if(!name){showToast('Vui lòng nhập tên phản ứng!','error');return;}
+    DB.customReactions = DB.customReactions||[];
     DB.customReactions.push({
-      name:document.getElementById('f_name')?.value||'',
-      trigger:document.getElementById('f_trigger')?.value||'',
-      effect:document.getElementById('f_effect')?.value||''
+      name: name,
+      trigger: document.getElementById('f_trigger')?.value||'',
+      effect: document.getElementById('f_effect')?.value||''
     });
     save(); closeModal(); renderReactions();
-    return;
+    showToast('Đã thêm phản ứng!','success');
 
   } else if(modalType==='geo'){
-    DB.geography.push({name,desc:document.getElementById('f_desc')?.value||'',forces:[]});
+    if(!name){showToast('Vui lòng nhập tên lục địa!','error');return;}
+    DB.geography.push({name, desc:document.getElementById('f_desc')?.value||'', forces:[]});
     save(); closeModal(); renderGeo();
+    showToast('Đã thêm lục địa!','success');
 
   } else if(modalType==='timeline'){
-    const ev = modalEditItem?.item || {};
-    ev.year = document.getElementById('f_year')?.value||'';
-    ev.title = document.getElementById('f_name')?.value||'';
-    ev.desc = document.getElementById('f_desc')?.value||'';
-    ev.chars = document.getElementById('f_chars')?.value||'';
-    ev.notes = document.getElementById('f_notes')?.value||'';
-    if(!ev.title){showToast('Vui lòng nhập tên sự kiện!','error');return;}
-    if(!modalEditItem) DB.timeline.push(ev);
+    const evName = document.getElementById('f_name')?.value?.trim()||'';
+    if(!evName){showToast('Vui lòng nhập tên sự kiện!','error');return;}
+    const evObj = modalEditItem?.item || {};
+    evObj.year = document.getElementById('f_year')?.value||'';
+    evObj.title = evName;
+    evObj.desc = document.getElementById('f_desc')?.value||'';
+    evObj.chars = document.getElementById('f_chars')?.value||'';
+    evObj.notes = document.getElementById('f_notes')?.value||'';
+    if(!modalEditItem?.item) DB.timeline.push(evObj);
     save(); closeModal(); renderTimeline();
+    showToast('Đã lưu sự kiện!','success');
 
   } else if(modalType==='customSection'){
-    DB.customSections.push({name,desc:document.getElementById('f_desc')?.value||'',entries:[]});
+    if(!name){showToast('Vui lòng nhập tên nhánh!','error');return;}
+    DB.customSections.push({name, desc:document.getElementById('f_desc')?.value||'', entries:[]});
     save(); closeModal(); renderCustomSections();
+    showToast('Đã thêm nhánh!','success');
 
   } else if(modalType==='customEntry'){
-    const {si,ei,item} = modalEditItem||{si:modalEditItem?.si};
-    const e = item||{};
-    e.name = document.getElementById('f_name')?.value||'';
-    e.summary = document.getElementById('f_summary')?.value||'';
-    e.content = document.getElementById('f_content')?.value||'';
-    e.notes = document.getElementById('f_notes')?.value||'';
-    e.image = document.getElementById('f_image')?.value||'';
-    if(!e.name){showToast('Vui lòng nhập tên!','error');return;}
-    const targetSi = modalEditItem?.si;
-    DB.customSections[targetSi].entries = DB.customSections[targetSi].entries||[];
-    if(ei===undefined) DB.customSections[targetSi].entries.push(e);
+    if(!name){showToast('Vui lòng nhập tên mục!','error');return;}
+    const si = modalEditItem?.si;
+    const ei = modalEditItem?.ei; // null nếu thêm mới, number nếu chỉnh sửa
+    if(si === undefined || si === null || !DB.customSections[si]){
+      showToast('Lỗi: Không tìm thấy nhánh!','error'); return;
+    }
+    DB.customSections[si].entries = DB.customSections[si].entries || [];
+    const entryObj = (ei !== null && ei !== undefined) ? DB.customSections[si].entries[ei] : {};
+    entryObj.name    = name;
+    entryObj.summary = document.getElementById('f_summary')?.value||'';
+    entryObj.content = document.getElementById('f_content')?.value||'';
+    entryObj.notes   = document.getElementById('f_notes')?.value||'';
+    entryObj.image   = document.getElementById('f_image')?.value||'';
+    if(ei === null || ei === undefined) {
+      DB.customSections[si].entries.push(entryObj);
+    }
     save(); closeModal(); renderCustomSections();
+    showToast('Đã lưu mục!','success');
 
   } else {
+    // Các loại item khác (weapon, artifact, herb, mineral, drop, pill)
     const key = itemDB[modalType];
-    const it = modalEditItem || {};
-    ['name','cap','pham','rarity','weaponGroup','weaponSubtype','mainStat','subStat','skill','herbNature','herbShape','desc','origin','use','medicineUse','alchemyUse','location','dropFrom','set2','set4','notes','image'].forEach(f=>{
-      const el=document.getElementById('f_'+f);if(el)it[f]=el.value;
+    if(!key){showToast('Loại không hợp lệ','error');return;}
+    const isNew = !modalEditItem;
+    const it = isNew ? {} : modalEditItem;
+    if(!name){showToast('Vui lòng nhập tên!','error');return;}
+    ['name','cap','pham','rarity','weaponGroup','weaponSubtype','mainStat','subStat','skill',
+     'herbNature','herbShape','desc','origin','use','medicineUse','alchemyUse','location','dropFrom',
+     'set2','set4','notes','image'].forEach(f=>{
+      const el=document.getElementById('f_'+f); if(el) it[f]=el.value;
     });
-    if(!modalEditItem) DB[key].push(it);
+    if(isNew) DB[key].push(it);
     save(); closeModal(); renderItems(modalType);
+    showToast('Đã lưu thành công!','success');
   }
-  showToast('Đã lưu thành công!','success');
 }
 
 function closeModal(){
@@ -2258,11 +2286,13 @@ document.getElementById('modal').addEventListener('click',function(e){if(e.targe
 
 // ===== EXPORT =====
 function exportHTML(){
-  const script=`<script>window.__EXPORT_DB__=${JSON.stringify(DB)};<\/script>`;
-  const html=document.documentElement.outerHTML.replace('<head>','<head>'+script);
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));
-  a.download='tiengioi-wiki.html'; a.click();
+  // Xuất file HTML kèm dữ liệu — không lưu ảnh trong data-url của HTML attr để tránh lỗi
+  const dbStr = JSON.stringify(DB);
+  const script = `<script>try{window.__EXPORT_DB__=JSON.parse(${JSON.stringify(dbStr)});}catch(e){}<\/script>`;
+  const html = document.documentElement.outerHTML.replace('</head>', script + '</head>');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));
+  a.download = 'tiengioi-wiki.html'; a.click();
   showToast('Đã xuất file HTML!','success');
 }
 
@@ -2272,29 +2302,39 @@ function showToast(msg, type='info'){
   t.className=`toast ${type}`;
   t.textContent=msg;
   document.body.appendChild(t);
-  setTimeout(()=>t.remove(),3000);
+  setTimeout(()=>{ try{t.remove();}catch(e){} },3500);
 }
 
-// ===== INIT =====
-if(window.__EXPORT_DB__){DB=window.__EXPORT_DB__;save();}
-if(localStorage.getItem('tiengioi_db_v2')){
-  const old=JSON.parse(localStorage.getItem('tiengioi_db_v2'));
-  if(old && !DB.characters.length) {
-    DB.characters=old.characters||[];
-    DB.weapons=old.weapons||[];
-    DB.artifacts=old.artifacts||[];
-    DB.herbs=old.herbs||[];
-    DB.minerals=old.minerals||[];
-    DB.drops=old.drops||[];
-    DB.pills=old.pills||[];
-    DB.geography=old.geography||[];
-    DB.timeline=old.timeline||[];
-    DB.customSections=old.customSections||[];
-    save();
-  }
-}
-updateStats();
-renderReactions();
+// ===== INIT — FIX #8: Khởi tạo an toàn, không crash nếu lỗi =====
+(function init() {
+  try {
+    // Load từ export file nếu có
+    if(window.__EXPORT_DB__) {
+      DB = window.__EXPORT_DB__;
+      ['characters','weapons','artifacts','herbs','minerals','drops','pills',
+       'geography','timeline','customSections','customReactions'].forEach(k => {
+        if (!Array.isArray(DB[k])) DB[k] = [];
+      });
+      localStorage.setItem('tiengioi_db_v3', JSON.stringify(DB));
+    }
+    // Migrate từ v2 nếu chưa có data v3
+    if(!DB.characters.length && localStorage.getItem('tiengioi_db_v2')) {
+      try {
+        const old = JSON.parse(localStorage.getItem('tiengioi_db_v2'));
+        if(old) {
+          ['characters','weapons','artifacts','herbs','minerals','drops','pills',
+           'geography','timeline','customSections'].forEach(k => {
+            if(Array.isArray(old[k]) && old[k].length) DB[k] = old[k];
+          });
+          localStorage.setItem('tiengioi_db_v3', JSON.stringify(DB));
+        }
+      } catch(e) { console.warn('Migration v2 failed:', e); }
+    }
+  } catch(e) { console.warn('Init error:', e); }
+  updateStats();
+  updateStorageBar();
+  renderReactions();
+})();
 </script>
 </body>
 </html>
