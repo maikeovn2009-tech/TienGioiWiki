@@ -2,39 +2,40 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Tiên Giới: Khởi Nguyên — Wiki</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:        #F0EAE0;
-  --bg-panel:  #E5DDD1;
-  --bg-card:   #FAF5EE;
-  --bg-card2:  #F2EBE0;
-  --border:    #C8B89A;
-  --border-2:  #B0976E;
-  --accent:    #7A4E2A;
-  --accent2:   #9B6235;
-  --accent3:   #3E6B55;
-  --gold:      #6B4E1C;
-  --gold2:     #9E7B3F;
-  --gold3:     #C4963A;
-  --red:       #A03030;
-  --green:     #2E6644;
-  --blue:      #2A5070;
-  --purple:    #5A3880;
-  --text:      #2A1A08;
-  --text-2:    #4A3418;
-  --text-3:    #7A6040;
-  --text-4:    #A8906A;
-  --shadow-sm: 0 1px 4px rgba(60,30,10,.10);
-  --shadow:    0 4px 18px rgba(60,30,10,.15);
-  --shadow-lg: 0 8px 32px rgba(60,30,10,.20);
+  /* New palette inspired by Chinese traditional colors */
+  --bg:        #1C1510;       /* very dark warm brown */
+  --bg-panel:  #231A12;       /* dark brown panel */
+  --bg-card:   #2B1F14;       /* card background */
+  --bg-card2:  #32251A;       /* secondary card */
+  --border:    #5C3D20;       /* warm brown border */
+  --border-2:  #8A5A2A;       /* brighter border */
+  --accent:    #C8602A;       /* 砖红 brick red */
+  --accent2:   #D4763A;       /* lighter brick */
+  --accent3:   #7AAA7A;       /* 蕉鹊 soft green */
+  --gold:      #D4A85A;       /* 唐茶 warm tan/gold */
+  --gold2:     #C09040;       /* darker gold */
+  --gold3:     #E8C070;       /* bright gold */
+  --red:       #C84040;       /* error red */
+  --green:     #5A9A6A;       /* success green */
+  --blue:      #4A7A9A;
+  --purple:    #7A5A9A;
+  --text:      #F0E8D8;       /* 粉白 warm white */
+  --text-2:    #D8C8A8;       /* slightly warm */
+  --text-3:    #A89068;       /* mid tone */
+  --text-4:    #6A5040;       /* muted */
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.4);
+  --shadow:    0 4px 18px rgba(0,0,0,.5);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.6);
   --radius:    4px;
   --radius-lg: 8px;
   --sidebar-w: 236px;
-  --pattern-color: rgba(100,60,20,.045);
+  --pattern-color: rgba(200,96,42,.04);
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
@@ -54,27 +55,32 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 2px; }
 
 /* ===== DECORATIVE PATTERNS ===== */
-.jade-border {
-  border: 1px solid var(--border);
-  position: relative;
-}
+.jade-border { border: 1px solid var(--border); position: relative; }
 .jade-border::before, .jade-border::after {
-  content: '';
-  position: absolute;
-  width: 8px; height: 8px;
-  border-color: var(--gold3);
-  border-style: solid;
+  content: ''; position: absolute; width: 8px; height: 8px;
+  border-color: var(--gold3); border-style: solid;
 }
 .jade-border::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
 .jade-border::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-.section-ornament {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+/* ===== HAMBURGER ===== */
+#hamburger {
+  display: none;
+  position: fixed; top: 11px; left: 14px; z-index: 300;
+  width: 38px; height: 38px; border-radius: var(--radius);
+  background: var(--bg-card); border: 1px solid var(--border-2);
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  cursor: pointer;
 }
-.section-ornament::before, .section-ornament::after {
-  content: '';
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-2), transparent);
+#hamburger span { display: block; width: 20px; height: 2px; background: var(--gold3); border-radius: 2px; transition: all .25s; }
+#hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#hamburger.open span:nth-child(2) { opacity: 0; }
+#hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ===== SIDEBAR OVERLAY (mobile) ===== */
+#sidebarOverlay {
+  display: none; position: fixed; inset: 0; z-index: 98;
+  background: rgba(0,0,0,.5); backdrop-filter: blur(2px);
 }
 
 /* ===== SIDEBAR ===== */
@@ -84,13 +90,13 @@ body {
   border-right: 1px solid var(--border);
   display: flex; flex-direction: column;
   z-index: 100;
+  transition: transform .3s ease;
 }
 #sidebar::after {
   content: '';
-  position: absolute;
-  top: 0; right: -1px; width: 3px; height: 100%;
+  position: absolute; top: 0; right: -1px; width: 3px; height: 100%;
   background: repeating-linear-gradient(180deg, var(--gold3) 0px, var(--gold3) 3px, transparent 3px, transparent 14px);
-  opacity: .25;
+  opacity: .3;
 }
 .sidebar-logo {
   padding: 22px 18px 16px;
@@ -101,7 +107,7 @@ body {
 .sidebar-logo-title {
   font-family: 'Noto Serif SC', 'Ma Shan Zheng', serif;
   font-size: 19px; font-weight: 700;
-  color: var(--gold); line-height: 1.3;
+  color: var(--gold3); line-height: 1.3;
   letter-spacing: 2px;
 }
 .sidebar-logo-deco {
@@ -125,29 +131,29 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .nav-item {
   display: flex; align-items: center; gap: 8px;
   padding: 7px 18px; cursor: pointer;
-  font-size: 12.5px; color: var(--text-2); font-weight: 500;
+  font-size: 12.5px; color: var(--text-3); font-weight: 500;
   transition: all .18s; position: relative;
   border-left: 2px solid transparent;
 }
-.nav-item:hover { color: var(--accent); background: rgba(122,78,42,.07); border-left-color: rgba(122,78,42,.4); }
-.nav-item.active { color: var(--accent); background: rgba(122,78,42,.12); border-left-color: var(--accent); font-weight: 700; }
+.nav-item:hover { color: var(--gold3); background: rgba(200,96,42,.1); border-left-color: rgba(200,96,42,.5); }
+.nav-item.active { color: var(--gold3); background: rgba(200,96,42,.18); border-left-color: var(--accent); font-weight: 700; }
 .sidebar-footer { padding: 12px 14px; border-top: 1px solid var(--border); display:flex; flex-direction:column; gap:7px; }
 #editModeBtn {
   width:100%; padding: 8px 12px;
   border: 1px solid var(--border-2); background: var(--bg-card);
-  color: var(--text-2); border-radius: var(--radius);
+  color: var(--text-3); border-radius: var(--radius);
   cursor: pointer; font-size: 12px; font-family: 'Mulish', sans-serif;
   display: flex; align-items: center; justify-content: center; gap: 8px;
   transition: all .2s; font-weight: 600;
 }
 #editModeBtn:hover { border-color: var(--accent); color: var(--accent); }
-#editModeBtn.active { background: var(--accent); color: #f5e8d5; border-color: var(--accent); }
+#editModeBtn.active { background: var(--accent); color: var(--text); border-color: var(--accent); }
 .edit-dot { width:6px; height:6px; border-radius:50%; background: var(--text-4); flex-shrink:0; }
-#editModeBtn.active .edit-dot { background: #ffd580; box-shadow: 0 0 5px #ffd580; }
+#editModeBtn.active .edit-dot { background: var(--gold3); box-shadow: 0 0 5px var(--gold3); }
 #exportBtn2 {
   width:100%; padding: 6px 12px;
   border: 1px solid var(--border); background: transparent;
-  color: var(--text-3); border-radius: var(--radius);
+  color: var(--text-4); border-radius: var(--radius);
   cursor: pointer; font-size: 11px; font-family: 'Mulish', sans-serif;
   transition: all .2s; font-weight: 600;
 }
@@ -157,13 +163,14 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 #main { margin-left: var(--sidebar-w); min-height: 100vh; }
 #topbar {
   position: sticky; top:0; z-index:50;
-  background: rgba(240,234,224,.93); backdrop-filter: blur(10px);
+  background: rgba(28,21,16,.93); backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
   padding: 11px 30px; display: flex; align-items: center; justify-content: space-between;
+  min-height: 50px;
 }
 .topbar-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 15px; font-weight: 600; color: var(--gold); letter-spacing: 2px;
+  font-size: 15px; font-weight: 600; color: var(--gold3); letter-spacing: 2px;
 }
 .topbar-deco { display: flex; gap: 4px; align-items: center; }
 .topbar-deco span { width: 4px; height: 4px; background: var(--gold3); opacity: .5; transform: rotate(45deg); }
@@ -174,14 +181,14 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .page-header { margin-bottom: 24px; }
 .page-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 26px; font-weight: 700; color: var(--gold);
+  font-size: 26px; font-weight: 700; color: var(--gold3);
   letter-spacing: 2px;
 }
 .page-desc { color: var(--text-3); margin-top: 4px; font-size: 12px; }
 .divider-title {
   display: flex; align-items: center; gap: 10px; margin: 6px 0 10px;
 }
-.divider-title::before { content: ''; width: 3px; height: 20px; background: var(--gold3); }
+.divider-title::before { content: ''; width: 3px; height: 20px; background: var(--accent); }
 .divider-title::after {
   content: ''; flex:1; height:1px;
   background: linear-gradient(90deg, var(--border-2), transparent);
@@ -195,10 +202,10 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 }
 .char-card::before {
   content: ''; position: absolute; top:0; left:0; right:0;
-  height: 2px; background: linear-gradient(90deg, var(--gold3), var(--accent3), var(--gold3));
+  height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent3), var(--gold3));
   opacity: 0; transition: opacity .2s;
 }
-.char-card:hover { border-color: var(--accent2); transform: translateY(-3px); box-shadow: var(--shadow); }
+.char-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
 .char-card:hover::before { opacity: 1; }
 .char-card-img {
   height: 128px; background: var(--bg-card2);
@@ -208,9 +215,9 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .char-card-img img { width:100%; height:100%; object-fit:cover; }
 .char-card-img .placeholder-text { font-size:11px; color:var(--text-4); font-style:italic; }
 .char-rarity-bar { height: 2px; }
-.rarity-5 { background: linear-gradient(90deg, #9B6B1A, #D4A82A, #9B6B1A); }
-.rarity-4 { background: linear-gradient(90deg, #7056a8, #9b7de8, #7056a8); }
-.rarity-3 { background: linear-gradient(90deg, #3868a8, #6899d8, #3868a8); }
+.rarity-5 { background: linear-gradient(90deg, #8A5A1A, #D4A82A, #8A5A1A); }
+.rarity-4 { background: linear-gradient(90deg, #5040A0, #8060D0, #5040A0); }
+.rarity-3 { background: linear-gradient(90deg, #2858A0, #5080C8, #2858A0); }
 .char-card-info { padding: 8px 10px; }
 .char-card-name { font-size: 13px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Noto Serif SC', serif; }
 .char-card-meta { display: flex; align-items: center; gap: 5px; margin-top: 4px; flex-wrap: wrap; }
@@ -219,24 +226,24 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
   border: 1px solid var(--border); color: var(--text-2); font-weight: 600;
   background: var(--bg-panel);
 }
-.char-stars { font-size: 10px; color: #9B6B1A; }
-.char-stars.s4 { color: #6B4A9E; }
+.char-stars { font-size: 10px; color: #D4A82A; }
+.char-stars.s4 { color: #8060D0; }
 
 /* ===== FILTER BAR ===== */
 .filter-bar { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
 .filter-btn {
   padding: 5px 12px; background: var(--bg-card);
-  border: 1px solid var(--border); color: var(--text-2);
+  border: 1px solid var(--border); color: var(--text-3);
   border-radius: 2px; cursor: pointer; font-size: 12px;
   font-family: 'Mulish', sans-serif; font-weight: 600;
-  transition: all .18s;
+  transition: all .18s; white-space: nowrap;
 }
-.filter-btn:hover, .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #f5e8d5; }
+.filter-btn:hover, .filter-btn.active { background: var(--accent); border-color: var(--accent); color: var(--text); }
 .search-box {
   padding: 6px 12px; background: var(--bg-card); border: 1px solid var(--border);
   color: var(--text); border-radius: 2px; font-size: 12px;
-  font-family: 'Mulish', sans-serif; outline: none; min-width: 200px;
-  transition: border-color .2s;
+  font-family: 'Mulish', sans-serif; outline: none; min-width: 160px;
+  transition: border-color .2s; flex: 1; max-width: 300px;
 }
 .search-box:focus { border-color: var(--accent); }
 .search-box::placeholder { color: var(--text-4); }
@@ -247,12 +254,12 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
   border-radius: 2px; cursor: pointer; font-size: 12px;
   font-family: 'Mulish', sans-serif; font-weight: 600; transition: all .18s;
 }
-.view-btn.active { background: var(--accent); border-color: var(--accent); color: #f5e8d5; }
+.view-btn.active { background: var(--accent); border-color: var(--accent); color: var(--text); }
 
 /* ===== ADD BUTTON ===== */
 .add-btn {
   display: inline-flex; align-items: center; gap: 5px;
-  padding: 7px 16px; background: var(--accent); color: #f5e8d5;
+  padding: 7px 16px; background: var(--accent); color: var(--text);
   border: none; border-radius: var(--radius); cursor: pointer;
   font-size: 12px; font-family: 'Mulish', sans-serif; font-weight: 600;
   transition: all .2s; margin-bottom: 16px; box-shadow: var(--shadow-sm);
@@ -268,7 +275,7 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .data-table tr:hover td { background: var(--bg-card2); cursor:pointer; }
 
 /* ===== DETAIL PANEL ===== */
-#detailOverlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(30,18,5,.45); backdrop-filter:blur(3px); }
+#detailOverlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.6); backdrop-filter:blur(3px); }
 #detailPanel {
   display:none; position:fixed; top:0; right:0; height:100vh; width:680px;
   background: var(--bg); border-left: 2px solid var(--border);
@@ -286,11 +293,11 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 @keyframes slideIn { from{transform:translateX(30px);opacity:0} to{transform:translateX(0);opacity:1} }
 .detail-close {
   position: sticky; top:0;
-  background: rgba(240,234,224,.95); backdrop-filter:blur(8px);
+  background: rgba(28,21,16,.95); backdrop-filter:blur(8px);
   padding: 12px 20px; display:flex; align-items:center; justify-content:space-between;
   border-bottom: 1px solid var(--border); z-index:10;
 }
-.detail-close-title { font-family:'Noto Serif SC',serif; font-size:15px; color:var(--gold); font-weight:700; letter-spacing:1px; }
+.detail-close-title { font-family:'Noto Serif SC',serif; font-size:15px; color:var(--gold3); font-weight:700; letter-spacing:1px; }
 .detail-close-actions { display:flex; gap:7px; }
 .close-btn {
   width:28px; height:28px; border-radius:2px;
@@ -304,8 +311,7 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 /* ===== SECTION CARDS ===== */
 .section-card {
   background: var(--bg-card); border: 1px solid var(--border);
-  padding: 16px 18px; margin-bottom: 12px;
-  position: relative;
+  padding: 16px 18px; margin-bottom: 12px; position: relative;
 }
 .section-card::before, .section-card::after {
   content: ''; position:absolute; width:8px; height:8px;
@@ -317,32 +323,32 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .section-title {
   font-family: 'Noto Serif SC', serif;
   font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 3px; color: var(--accent); margin-bottom: 14px;
+  letter-spacing: 3px; color: var(--gold3); margin-bottom: 14px;
   padding-bottom: 8px; border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 8px;
 }
 .section-title::before {
   content: ''; display:inline-block; width:3px; height:14px;
-  background: var(--gold3); flex-shrink:0;
+  background: var(--accent); flex-shrink:0;
 }
 
 .field-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .field-grid.cols3 { grid-template-columns:1fr 1fr 1fr; }
 .field-item { display:flex; flex-direction:column; gap:2px; }
 .field-label { font-size:9px; color:var(--text-4); text-transform:uppercase; letter-spacing:1.5px; font-weight:700; }
-.field-value { font-size:12.5px; color:var(--text); line-height:1.6; }
+.field-value { font-size:12.5px; color:var(--text-2); line-height:1.6; }
 .field-value.empty { color:var(--text-4); font-style:italic; }
 .field-full { margin-bottom:10px; }
 .field-full:last-child { margin-bottom:0; }
 
 .stat-row { display:flex; align-items:center; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border); }
 .stat-row:last-child { border-bottom:none; }
-.stat-name { font-size:11.5px; color:var(--text-2); font-weight:500; }
-.stat-val { font-size:12.5px; color:var(--text); font-weight:700; }
+.stat-name { font-size:11.5px; color:var(--text-3); font-weight:500; }
+.stat-val { font-size:12.5px; color:var(--gold3); font-weight:700; }
 
 .skill-card { background:var(--bg-card2); border:1px solid var(--border); border-left:3px solid var(--accent); padding:12px 14px; margin-bottom:9px; }
 .skill-type { font-size:9px; text-transform:uppercase; letter-spacing:2px; color:var(--accent3); margin-bottom:2px; font-weight:700; }
-.skill-name { font-family:'Noto Serif SC',serif; font-size:15px; font-weight:700; color:var(--gold); margin-bottom:5px; }
+.skill-name { font-family:'Noto Serif SC',serif; font-size:15px; font-weight:700; color:var(--gold3); margin-bottom:5px; }
 .skill-desc { font-size:12px; color:var(--text-2); line-height:1.7; }
 
 .constellation-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
@@ -351,7 +357,7 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .const-desc { font-size:12px; color:var(--text-2); margin-top:4px; line-height:1.6; }
 
 /* ===== MODAL ===== */
-#modal { display:none; position:fixed; inset:0; z-index:300; background:rgba(30,18,5,.55); backdrop-filter:blur(5px); overflow-y:auto; padding:36px 18px; }
+#modal { display:none; position:fixed; inset:0; z-index:300; background:rgba(0,0,0,.65); backdrop-filter:blur(5px); overflow-y:auto; padding:36px 18px; }
 .modal-box {
   max-width:840px; margin:0 auto;
   background:var(--bg); border:1px solid var(--border-2);
@@ -370,7 +376,7 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
   display:flex; align-items:center; justify-content:space-between;
   background: var(--bg-panel);
 }
-.modal-title { font-family:'Noto Serif SC',serif; font-size:17px; color:var(--gold); font-weight:700; letter-spacing:1px; }
+.modal-title { font-family:'Noto Serif SC',serif; font-size:17px; color:var(--gold3); font-weight:700; letter-spacing:1px; }
 .modal-body { padding:22px; max-height:74vh; overflow-y:auto; }
 .modal-footer { padding:12px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:9px; background:var(--bg-panel); }
 
@@ -389,7 +395,7 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .form-group.full { grid-column:1/-1; }
 .form-label { font-size:10.5px; color:var(--text-3); font-weight:700; letter-spacing:.3px; }
 .form-input, .form-select, .form-textarea {
-  background: var(--bg-card); border:1px solid var(--border);
+  background: var(--bg-card2); border:1px solid var(--border);
   color: var(--text); border-radius:var(--radius);
   padding: 8px 11px; font-size:13px; font-family:'Mulish',sans-serif;
   outline:none; transition:border-color .2s; width:100%;
@@ -410,10 +416,10 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 
 /* ===== BUTTONS ===== */
 .btn { padding:7px 16px; border-radius:var(--radius); cursor:pointer; font-size:12.5px; font-family:'Mulish',sans-serif; font-weight:600; transition:all .2s; border:1px solid; }
-.btn-primary { background:var(--accent); border-color:var(--accent); color:#f5e8d5; }
+.btn-primary { background:var(--accent); border-color:var(--accent); color:var(--text); }
 .btn-primary:hover { background:var(--accent2); border-color:var(--accent2); }
-.btn-danger { background:rgba(160,48,48,.1); border-color:var(--red); color:var(--red); }
-.btn-danger:hover { background:rgba(160,48,48,.2); }
+.btn-danger { background:rgba(200,64,64,.15); border-color:var(--red); color:var(--red); }
+.btn-danger:hover { background:rgba(200,64,64,.25); }
 .btn-ghost { background:transparent; border-color:var(--border); color:var(--text-3); }
 .btn-ghost:hover { border-color:var(--border-2); color:var(--text-2); }
 
@@ -432,10 +438,10 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 }
 .home-hero::after {
   content:''; position:absolute; top:0; left:0; right:0; height:3px;
-  background: repeating-linear-gradient(90deg, var(--gold3) 0px, var(--gold3) 6px, transparent 6px, transparent 12px);
-  opacity:.5;
+  background: repeating-linear-gradient(90deg, var(--accent) 0px, var(--accent) 6px, transparent 6px, transparent 12px);
+  opacity:.7;
 }
-.home-hero-title { font-family:'Noto Serif SC',serif; font-size:32px; font-weight:700; color:var(--gold); margin-bottom:7px; letter-spacing:2px; }
+.home-hero-title { font-family:'Noto Serif SC',serif; font-size:32px; font-weight:700; color:var(--gold3); margin-bottom:7px; letter-spacing:2px; }
 .home-hero-sub { color:var(--text-2); font-size:13px; max-width:500px; line-height:1.9; }
 .home-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:22px; }
 .home-stat {
@@ -443,9 +449,9 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
   padding:16px 18px; text-align:center;
   transition:all .2s; position:relative; overflow:hidden;
 }
-.home-stat::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold3); opacity:0; transition:opacity .2s; }
+.home-stat::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--accent); opacity:0; transition:opacity .2s; }
 .home-stat:hover { border-color:var(--accent); box-shadow:var(--shadow-sm); }
-.home-stat:hover::before { opacity:.5; }
+.home-stat:hover::before { opacity:.7; }
 .home-stat-num { font-family:'Noto Serif SC',serif; font-size:28px; font-weight:700; color:var(--accent); }
 .home-stat-label { font-size:10px; color:var(--text-3); text-transform:uppercase; letter-spacing:1.5px; margin-top:2px; font-weight:700; }
 .home-sections { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
@@ -454,15 +460,15 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
   padding:16px 18px; cursor:pointer;
   transition:all .22s; position:relative;
 }
-.home-section-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--gold3); opacity:0; transition:opacity .2s; }
+.home-section-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--accent); opacity:0; transition:opacity .2s; }
 .home-section-card:hover { border-color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow); }
 .home-section-card:hover::before { opacity:1; }
-.home-section-title { font-family:'Noto Serif SC',serif; font-size:15px; font-weight:700; color:var(--gold); margin-bottom:3px; }
+.home-section-title { font-family:'Noto Serif SC',serif; font-size:15px; font-weight:700; color:var(--gold3); margin-bottom:3px; }
 .home-section-desc { font-size:11.5px; color:var(--text-3); }
 
 /* ===== INFO SECTION ===== */
 .info-section { background:var(--bg-card); border:1px solid var(--border); padding:18px; margin-bottom:14px; }
-.info-section h3 { font-family:'Noto Serif SC',serif; font-size:16px; font-weight:700; color:var(--gold); margin-bottom:12px; letter-spacing:1px; }
+.info-section h3 { font-family:'Noto Serif SC',serif; font-size:16px; font-weight:700; color:var(--gold3); margin-bottom:12px; letter-spacing:1px; }
 .info-text { font-size:13px; color:var(--text-2); line-height:1.8; }
 .info-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-top:7px; }
 .info-table th { padding:7px 11px; background:var(--bg-panel); color:var(--text-3); text-align:left; font-size:10px; text-transform:uppercase; letter-spacing:1.5px; border:1px solid var(--border); font-weight:700; }
@@ -473,7 +479,7 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .reaction-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
 .reaction-card { background:var(--bg-card); border:1px solid var(--border); padding:13px; transition:all .2s; cursor:default; }
 .reaction-card:hover { border-color:var(--accent3); box-shadow:var(--shadow-sm); }
-.reaction-name { font-family:'Noto Serif SC',serif; font-size:14px; font-weight:700; color:var(--gold); margin-bottom:2px; }
+.reaction-name { font-family:'Noto Serif SC',serif; font-size:14px; font-weight:700; color:var(--gold3); margin-bottom:2px; }
 .reaction-trigger { font-size:10px; color:var(--accent3); margin-bottom:5px; font-weight:600; letter-spacing:.5px; }
 .reaction-effect { font-size:11.5px; color:var(--text-2); line-height:1.65; }
 .reaction-filter-bar { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; align-items:center; }
@@ -481,7 +487,7 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 /* ===== GEO ===== */
 .geo-continent { background:var(--bg-card); border:1px solid var(--border); margin-bottom:12px; overflow:hidden; }
 .geo-continent-header { padding:12px 16px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; background:var(--bg-panel); border-bottom:1px solid var(--border); }
-.geo-continent-name { font-family:'Noto Serif SC',serif; font-size:16px; font-weight:700; color:var(--gold); letter-spacing:1px; }
+.geo-continent-name { font-family:'Noto Serif SC',serif; font-size:16px; font-weight:700; color:var(--gold3); letter-spacing:1px; }
 .geo-forces { padding:13px 16px; }
 .force-item { padding:9px 12px; background:var(--bg-card2); margin-bottom:7px; border:1px solid var(--border); border-left:3px solid var(--accent3); }
 .force-name { font-size:13px; font-weight:700; color:var(--text); }
@@ -496,36 +502,34 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 .item-card-body { padding:9px 11px; }
 .item-card-name { font-size:12.5px; font-weight:700; color:var(--text); }
 .item-card-meta { font-size:10.5px; color:var(--text-3); margin-top:3px; display:flex; gap:4px; flex-wrap:wrap; }
-/* Rarity badges - cấp */
 .rarity-badge { display:inline-block; padding:1px 7px; border-radius:2px; font-size:10px; font-weight:700; }
-.rarity-huang { background:rgba(180,140,40,.12); color:#7A5C1A; border:1px solid rgba(180,140,40,.4); }  /* Hoàng - trắng */
-.rarity-xuan  { background:rgba(60,100,180,.12); color:#2A4E8A; border:1px solid rgba(60,100,180,.4); }  /* Huyền - lam */
-.rarity-dia   { background:rgba(110,60,180,.12); color:#5A2E9A; border:1px solid rgba(110,60,180,.4); }  /* Địa - tím */
-.rarity-thien { background:rgba(180,140,20,.18); color:#7A5800; border:1px solid rgba(180,140,20,.5); }  /* Thiên - vàng */
-/* Phẩm badges */
-.pham-ha     { background:rgba(140,140,140,.1); color:#5A5A5A; border:1px solid rgba(140,140,140,.3); }
-.pham-trung  { background:rgba(60,140,80,.1); color:#2A6A3A; border:1px solid rgba(60,140,80,.3); }
-.pham-thuong { background:rgba(60,80,180,.1); color:#2A3A8A; border:1px solid rgba(60,80,180,.3); }
-.pham-cuc    { background:rgba(140,40,160,.1); color:#6A1A7A; border:1px solid rgba(140,40,160,.3); }
+.rarity-huang { background:rgba(212,168,90,.15); color:#D4A85A; border:1px solid rgba(212,168,90,.4); }
+.rarity-xuan  { background:rgba(74,122,154,.15); color:#6AAAD4; border:1px solid rgba(74,122,154,.4); }
+.rarity-dia   { background:rgba(122,90,154,.15); color:#AA7AE4; border:1px solid rgba(122,90,154,.4); }
+.rarity-thien { background:rgba(232,192,112,.15); color:#E8C070; border:1px solid rgba(232,192,112,.4); }
+.pham-ha     { background:rgba(160,160,160,.1); color:#909090; border:1px solid rgba(160,160,160,.3); }
+.pham-trung  { background:rgba(90,154,106,.12); color:#7AAA7A; border:1px solid rgba(90,154,106,.3); }
+.pham-thuong { background:rgba(74,100,200,.12); color:#7A9AE0; border:1px solid rgba(74,100,200,.3); }
+.pham-cuc    { background:rgba(180,80,200,.12); color:#D070E0; border:1px solid rgba(180,80,200,.3); }
 
 /* ===== TIMELINE ===== */
 .timeline-wrap { position:relative; padding-left:28px; }
 .timeline-wrap::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:1px; background:repeating-linear-gradient(180deg,var(--border-2) 0,var(--border-2) 6px,transparent 6px,transparent 12px); }
 .timeline-item { position:relative; margin-bottom:18px; }
-.timeline-item::before { content:''; position:absolute; left:-22px; top:7px; width:8px; height:8px; background:var(--gold3); transform:rotate(45deg); border:1px solid var(--bg); }
+.timeline-item::before { content:''; position:absolute; left:-22px; top:7px; width:8px; height:8px; background:var(--accent); transform:rotate(45deg); border:1px solid var(--bg); }
 .timeline-card { background:var(--bg-card); border:1px solid var(--border); padding:13px 15px; transition:all .2s; }
 .timeline-card:hover { border-color:var(--accent); box-shadow:var(--shadow-sm); }
 .timeline-year { font-size:10px; color:var(--accent); font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:3px; }
-.timeline-title { font-family:'Noto Serif SC',serif; font-size:15px; font-weight:700; color:var(--gold); margin-bottom:4px; }
+.timeline-title { font-family:'Noto Serif SC',serif; font-size:15px; font-weight:700; color:var(--gold3); margin-bottom:4px; }
 .timeline-desc { font-size:11.5px; color:var(--text-2); line-height:1.7; }
 
 /* ===== PASS MODAL ===== */
-#passModal { display:none; position:fixed; inset:0; z-index:500; background:rgba(30,18,5,.65); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
+#passModal { display:none; position:fixed; inset:0; z-index:500; background:rgba(0,0,0,.75); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
 .pass-box { background:var(--bg); border:1px solid var(--border-2); padding:28px; width:320px; text-align:center; box-shadow:var(--shadow-lg); position:relative; }
 .pass-box::before, .pass-box::after { content:''; position:absolute; width:10px; height:10px; border-color:var(--gold3); border-style:solid; }
 .pass-box::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
 .pass-box::after  { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
-.pass-title { font-family:'Noto Serif SC',serif; font-size:19px; color:var(--gold); margin-bottom:5px; font-weight:700; letter-spacing:1px; }
+.pass-title { font-family:'Noto Serif SC',serif; font-size:19px; color:var(--gold3); margin-bottom:5px; font-weight:700; letter-spacing:1px; }
 .pass-desc { font-size:11px; color:var(--text-3); margin-bottom:18px; }
 .pass-input { width:100%; text-align:center; letter-spacing:4px; font-size:15px; margin-bottom:14px; }
 .pass-error { color:var(--red); font-size:11px; margin-bottom:7px; min-height:16px; }
@@ -545,7 +549,7 @@ nav { flex:1; overflow-y:auto; padding: 8px 0; }
 /* ===== NAV BADGE ===== */
 .nav-add-badge {
   margin-left:auto; font-size:9px; padding:1px 6px; border-radius:2px;
-  background:rgba(122,78,42,.15); color:var(--accent); font-weight:700;
+  background:rgba(200,96,42,.2); color:var(--accent); font-weight:700;
   display:none;
 }
 body.edit-mode .nav-add-badge { display:inline-block; }
@@ -556,7 +560,7 @@ body.edit-mode .nav-add-badge { display:inline-block; }
   padding:18px; background:var(--bg-card); border:1px solid var(--border);
   position:relative; overflow:hidden;
 }
-.char-detail-hero::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--gold3),var(--accent3),var(--gold3)); }
+.char-detail-hero::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent),var(--accent3),var(--gold3)); }
 .char-detail-avatar {
   width:105px; height:105px;
   background:var(--bg-panel); border:1px solid var(--border);
@@ -568,7 +572,7 @@ body.edit-mode .nav-add-badge { display:inline-block; }
 .char-detail-title { font-size:12.5px; color:var(--text-3); margin-top:3px; font-style:italic; }
 .char-detail-tags { display:flex; gap:5px; margin-top:9px; flex-wrap:wrap; align-items:center; }
 .tag { font-size:10px; padding:2px 9px; border-radius:2px; border:1px solid var(--border); color:var(--text-2); background:var(--bg-panel); font-weight:600; }
-.tag.gold { border-color:rgba(107,78,28,.4); color:var(--gold); background:rgba(107,78,28,.08); }
+.tag.gold { border-color:rgba(212,168,90,.4); color:var(--gold3); background:rgba(212,168,90,.08); }
 
 /* ===== EMPTY STATE ===== */
 .empty-state { text-align:center; padding:55px; color:var(--text-4); }
@@ -577,7 +581,7 @@ body.edit-mode .nav-add-badge { display:inline-block; }
 /* ===== VOICE LINES ===== */
 .voice-line { background:var(--bg-card2); border-left:3px solid var(--accent3); padding:9px 13px; margin-bottom:7px; }
 .voice-label { font-size:9px; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent3); font-weight:700; margin-bottom:2px; }
-.voice-text { font-size:12.5px; color:var(--text); font-style:italic; line-height:1.65; }
+.voice-text { font-size:12.5px; color:var(--text-2); font-style:italic; line-height:1.65; }
 
 /* ===== CHECKBOX GROUP ===== */
 .checkbox-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
@@ -586,20 +590,110 @@ body.edit-mode .nav-add-badge { display:inline-block; }
 .checkbox-item label { font-size:12px; color:var(--text-2); cursor:pointer; }
 
 /* ===== STORY SECTION ===== */
-.story-block { background:var(--bg-card2); border:1px solid var(--border); border-left:3px solid var(--gold3); padding:12px 14px; margin-bottom:9px; }
-.story-block-title { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:6px; }
+.story-block { background:var(--bg-card2); border:1px solid var(--border); border-left:3px solid var(--gold); padding:12px 14px; margin-bottom:9px; }
+.story-block-title { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--gold3); font-weight:700; margin-bottom:6px; }
 .story-block-content { font-size:12.5px; color:var(--text-2); line-height:1.8; }
 
 /* ===== RARITY COLORS ===== */
-.weapon-5star { color:#9B6B1A; font-weight:700; }
-.weapon-4star { color:#6B4A9E; font-weight:700; }
-.weapon-3star { color:#2A5AA0; font-weight:700; }
+.weapon-5star { color:#D4A82A; font-weight:700; }
+.weapon-4star { color:#8060D0; font-weight:700; }
+.weapon-3star { color:#4A78C0; font-weight:700; }
 
 /* ===== WEAPON GROUP BADGE ===== */
-.weapon-group-tag { font-size:10px; padding:2px 8px; border-radius:2px; background:rgba(62,107,85,.12); color:var(--accent3); border:1px solid rgba(62,107,85,.3); font-weight:700; }
+.weapon-group-tag { font-size:10px; padding:2px 8px; border-radius:2px; background:rgba(122,170,122,.12); color:var(--accent3); border:1px solid rgba(122,170,122,.3); font-weight:700; }
+
+/* ===== TABLE MOBILE SCROLL ===== */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ===== RESPONSIVE — MOBILE ===== */
+@media (max-width: 768px) {
+  #hamburger { display: flex; }
+
+  #sidebar {
+    transform: translateX(-100%);
+    width: min(var(--sidebar-w), 80vw);
+  }
+  #sidebar.open { transform: translateX(0); }
+  #sidebarOverlay.open { display: block; }
+
+  #main { margin-left: 0; }
+
+  #topbar { padding: 11px 16px 11px 60px; }
+  .topbar-title { font-size: 13px; letter-spacing: 1px; }
+
+  .page { padding: 16px; }
+
+  .page-title { font-size: 20px; }
+
+  .home-hero { padding: 20px; }
+  .home-hero-title { font-size: 22px; }
+  .home-hero-sub { font-size: 12px; }
+
+  .home-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .home-stat-num { font-size: 22px; }
+
+  .home-sections { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .home-section-title { font-size: 13px; }
+  .home-section-desc { font-size: 10px; }
+
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+
+  .filter-bar { gap: 5px; }
+  .filter-btn { padding: 4px 9px; font-size: 11px; }
+  .search-box { min-width: 120px; font-size: 12px; }
+  .view-toggle { margin-left: 0 !important; }
+
+  /* Detail panel full screen on mobile */
+  #detailPanel { width: 100vw; }
+
+  /* Modal full width on mobile */
+  #modal { padding: 12px 8px; }
+  .modal-box { max-width: 100%; }
+  .modal-body { max-height: 65vh; padding: 14px; }
+
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid.cols3 { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+
+  .field-grid { grid-template-columns: 1fr; }
+  .field-grid.cols3 { grid-template-columns: 1fr; }
+
+  .constellation-grid { grid-template-columns: 1fr; }
+
+  .char-detail-hero { flex-direction: column; }
+  .char-detail-avatar { width: 80px; height: 80px; }
+
+  .data-table { font-size: 11px; }
+  .data-table th, .data-table td { padding: 7px 8px; }
+
+  /* Hide some table columns on very small screens */
+  .data-table th:nth-child(n+5),
+  .data-table td:nth-child(n+5) { display: none; }
+
+  .reaction-grid { grid-template-columns: 1fr; }
+
+  .pass-box { width: 90vw; padding: 20px; }
+
+  .info-table { font-size: 11px; }
+  .info-table th, .info-table td { padding: 5px 8px; }
+
+  .toast { bottom: 12px; right: 12px; left: 12px; font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .home-sections { grid-template-columns: 1fr; }
+  .home-stats { grid-template-columns: repeat(2, 1fr); }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
 <body>
+
+<!-- HAMBURGER (mobile) -->
+<div id="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
+</div>
+<div id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <!-- SIDEBAR -->
 <div id="sidebar">
@@ -683,7 +777,7 @@ body.edit-mode .nav-add-badge { display:inline-block; }
       <div class="page-desc">Tất cả nhân vật trong Tiên Giới: Khởi Nguyên</div>
     </div>
     <div class="filter-bar">
-      <input class="search-box" type="text" placeholder="Tìm kiếm nhân vật..." id="charSearch" oninput="filterChars()">
+      <input class="search-box" type="text" placeholder="Tìm kiếm..." id="charSearch" oninput="filterChars()">
       <button class="filter-btn active" data-filter="all" onclick="setCharFilter(this,'all')">Tất cả</button>
       <button class="filter-btn" data-filter="5" onclick="setCharFilter(this,'5')">5 sao</button>
       <button class="filter-btn" data-filter="4" onclick="setCharFilter(this,'4')">4 sao</button>
@@ -695,10 +789,12 @@ body.edit-mode .nav-add-badge { display:inline-block; }
     <button class="add-btn hidden" id="addCharBtn" onclick="openCharModal()">+ Thêm nhân vật</button>
     <div id="charGridView"><div class="cards-grid" id="charGrid"></div></div>
     <div id="charTableView" style="display:none">
+      <div class="table-scroll">
       <table class="data-table">
         <thead><tr><th>Nhân vật</th><th>Sao</th><th>Nguyên tố</th><th>Hệ tu</th><th>Vũ khí</th><th>Cảnh giới</th><th>Patch</th></tr></thead>
         <tbody id="charTableBody"></tbody>
       </table>
+      </div>
     </div>
     <div id="charEmpty" class="empty-state" style="display:none"><div class="empty-state-title">Chưa có nhân vật nào. Bật chế độ chỉnh sửa để thêm!</div></div>
   </div>
@@ -708,22 +804,25 @@ body.edit-mode .nav-add-badge { display:inline-block; }
     <div class="page-header"><div class="page-title">Hệ tu &amp; Chỉ số</div><div class="divider-title"></div></div>
     <div class="info-section">
       <h3>Hệ tu — Vai trò chiến đấu</h3>
+      <div class="table-scroll">
       <table class="info-table">
         <thead><tr><th>Hệ tu</th><th>Vai trò</th><th>Mô tả</th></tr></thead>
         <tbody>
-          <tr><td>Kiếm Tu</td><td style="color:#A03030">DPS</td><td>Công kích liên tục, sát thương cao, cận chiến</td></tr>
-          <tr><td>Khí Tu</td><td style="color:#7A5C2E">Sub-DPS / Buff</td><td>Vận dụng linh khí, hiệu ứng nguyên tố</td></tr>
-          <tr><td>Đan Tu</td><td style="color:#2E6644">Heal / Support</td><td>Luyện đan, hồi phục, tăng cường đồng đội</td></tr>
-          <tr><td>Trận Tu</td><td style="color:#3E6B55">Support / CC</td><td>Bố trận pháp, kiểm soát vùng</td></tr>
-          <tr><td>Thể Tu</td><td style="color:#5A3880">Tank / DPS</td><td>Luyện thân, phòng thủ cao, phản đòn</td></tr>
-          <tr><td>Ma Tu</td><td style="color:#8B0000">DPS / Debuff</td><td>Tiêu hao sinh mệnh đổi lấy sức mạnh</td></tr>
-          <tr><td>Thần Tu</td><td style="color:#6B4A9E">Sub-DPS / Buff</td><td>Thần thức, cổ pháp, biến hóa</td></tr>
-          <tr><td>Ẩn Tu</td><td style="color:#4A3418">Assassin / Debuff</td><td>Tàng hình, ám sát, hạ gục mục tiêu đơn</td></tr>
+          <tr><td>Kiếm Tu</td><td style="color:#E06060">DPS</td><td>Công kích liên tục, sát thương cao, cận chiến</td></tr>
+          <tr><td>Khí Tu</td><td style="color:#D4A85A">Sub-DPS / Buff</td><td>Vận dụng linh khí, hiệu ứng nguyên tố</td></tr>
+          <tr><td>Đan Tu</td><td style="color:#7AAA7A">Heal / Support</td><td>Luyện đan, hồi phục, tăng cường đồng đội</td></tr>
+          <tr><td>Trận Tu</td><td style="color:#6AAAD4">Support / CC</td><td>Bố trận pháp, kiểm soát vùng</td></tr>
+          <tr><td>Thể Tu</td><td style="color:#AA7AE4">Tank / DPS</td><td>Luyện thân, phòng thủ cao, phản đòn</td></tr>
+          <tr><td>Ma Tu</td><td style="color:#C84040">DPS / Debuff</td><td>Tiêu hao sinh mệnh linh đài đổi lấy sức mạnh</td></tr>
+          <tr><td>Thần Tu</td><td style="color:#D4A85A">Sub-DPS / Buff</td><td>Thần thức, cổ pháp, biến hóa</td></tr>
+          <tr><td>Ẩn Tu</td><td style="color:#A89068">Assassin / Debuff</td><td>Tàng hình, ám sát, hạ gục mục tiêu đơn</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
     <div class="info-section">
       <h3>Chỉ số thuộc tính (Level 99)</h3>
+      <div class="table-scroll">
       <table class="info-table">
         <thead><tr><th>Chỉ số</th><th>Max 4 sao</th><th>Max 5 sao</th><th>Ghi chú</th></tr></thead>
         <tbody>
@@ -735,6 +834,7 @@ body.edit-mode .nav-add-badge { display:inline-block; }
           <tr><td>Tăng sát thương hệ</td><td>25%</td><td>30%</td><td>Theo linh căn đã chọn</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 
@@ -742,7 +842,7 @@ body.edit-mode .nav-add-badge { display:inline-block; }
   <div class="page" id="page-weapons">
     <div class="page-header"><div class="page-title">Pháp bảo trấn vật</div><div class="divider-title"></div></div>
     <div class="filter-bar">
-      <input class="search-box" type="text" placeholder="Tìm kiếm vũ khí..." id="weaponSearch" oninput="filterItems('weapon')">
+      <input class="search-box" type="text" placeholder="Tìm kiếm..." id="weaponSearch" oninput="filterItems('weapon')">
       <button class="filter-btn active" data-wg="all" onclick="setWeaponGroupFilter(this,'all')">Tất cả</button>
       <button class="filter-btn" data-wg="KIẾM" onclick="setWeaponGroupFilter(this,'KIẾM')">Kiếm</button>
       <button class="filter-btn" data-wg="CUNG" onclick="setWeaponGroupFilter(this,'CUNG')">Cung</button>
@@ -756,6 +856,7 @@ body.edit-mode .nav-add-badge { display:inline-block; }
     <div id="weaponEmpty" class="empty-state" style="display:none"><div class="empty-state-title">Chưa có vũ khí nào.</div></div>
     <div class="info-section" style="margin-top:22px">
       <h3>Phân loại vũ khí</h3>
+      <div class="table-scroll">
       <table class="info-table">
         <thead><tr><th>Nhóm lớn</th><th>Nhóm nhỏ</th><th>Ghi chú</th></tr></thead>
         <tbody>
@@ -775,13 +876,15 @@ body.edit-mode .nav-add-badge { display:inline-block; }
           <tr><td>Đại phủ / Trượng thần</td><td>Phá giáp cực mạnh, chậm</td></tr>
           <tr><td rowspan="2"><b>QUYỀN GIÁP</b></td><td>Quyền giáp linh tinh</td><td>Cận chiến bùng nổ, tốc độ cao</td></tr>
           <tr><td>Vô vũ khí (Thể tu)</td><td>Luyện thể, đấm bằng linh lực</td></tr>
-          <tr><td rowspan="3"><b>LINH BẢO</b> (đặc biệt)</td><td>Gương linh / Ngọc bội</td><td>Phòng thủ, phản chiếu</td></tr>
+          <tr><td rowspan="3"><b>LINH BẢO</b></td><td>Gương linh / Ngọc bội</td><td>Phòng thủ, phản chiếu</td></tr>
           <tr><td>Bài / Thẻ bài</td><td>Triệu hồi, ngẫu nhiên</td></tr>
           <tr><td>Nhạc khí linh</td><td>Điều khiển tình cảm & trạng thái</td></tr>
         </tbody>
       </table>
+      </div>
       <div style="margin-top:14px">
         <h3>Phân cấp</h3>
+        <div class="table-scroll">
         <table class="info-table">
           <thead><tr><th>Cấp</th><th>Tên</th><th>Ghi chú</th></tr></thead>
           <tbody>
@@ -789,9 +892,10 @@ body.edit-mode .nav-add-badge { display:inline-block; }
             <tr><td>2 sao</td><td>Linh khí</td><td>Có thể tự luyện</td></tr>
             <tr><td>3 sao</td><td>Địa khí</td><td>Có thể tự luyện</td></tr>
             <tr><td>4 sao</td><td>Tiên khí</td><td>Cần điều kiện đặc biệt</td></tr>
-            <tr><td>5 sao</td><td style="color:var(--gold);font-weight:700">Thần khí</td><td>Hiếm nhất — Bản Mệnh Pháp Bảo</td></tr>
+            <tr><td>5 sao</td><td style="color:var(--gold3);font-weight:700">Thần khí</td><td>Hiếm nhất — Bản Mệnh Pháp Bảo</td></tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </div>
@@ -841,18 +945,20 @@ body.edit-mode .nav-add-badge { display:inline-block; }
     <div class="page-header"><div class="page-title">Đột phá cảnh giới</div><div class="divider-title"></div></div>
     <div class="info-section">
       <h3>Cảnh giới &amp; Cấp độ</h3>
+      <div class="table-scroll">
       <table class="info-table">
         <thead><tr><th>Cảnh giới</th><th>Cấp (Lv)</th><th>Đột phá tại</th></tr></thead>
         <tbody>
-          <tr><td style="color:#2E6644;font-weight:700">Luyện Khí</td><td>1 → 20</td><td>Lv.20</td></tr>
-          <tr><td style="color:#A03030;font-weight:700">Trúc Cơ</td><td>21 → 40</td><td>Lv.40</td></tr>
-          <tr><td style="color:#6B4A9E;font-weight:700">Kết Đan</td><td>41 → 60</td><td>Lv.60</td></tr>
-          <tr><td style="color:#2A5070;font-weight:700">Nguyên Anh</td><td>61 → 80</td><td>Lv.80</td></tr>
-          <tr><td style="color:#7A5C2E;font-weight:700">Hóa Thần</td><td>81 → 90</td><td>Lv.90</td></tr>
-          <tr><td style="color:#5A3880;font-weight:700">Luyện Hư</td><td>91 → 99</td><td>Lv.99</td></tr>
-          <tr><td style="color:#9B6B1A;font-weight:700">Đại Thừa / Độ Kiếp</td><td>100+</td><td>—</td></tr>
+          <tr><td style="color:#7AAA7A;font-weight:700">Luyện Khí</td><td>1 → 20</td><td>Lv.20</td></tr>
+          <tr><td style="color:#E06060;font-weight:700">Trúc Cơ</td><td>21 → 40</td><td>Lv.40</td></tr>
+          <tr><td style="color:#AA7AE4;font-weight:700">Kết Đan</td><td>41 → 60</td><td>Lv.60</td></tr>
+          <tr><td style="color:#6AAAD4;font-weight:700">Nguyên Anh</td><td>61 → 80</td><td>Lv.80</td></tr>
+          <tr><td style="color:#D4A85A;font-weight:700">Hóa Thần</td><td>81 → 90</td><td>Lv.90</td></tr>
+          <tr><td style="color:#C070D0;font-weight:700">Luyện Hư</td><td>91 → 99</td><td>Lv.99</td></tr>
+          <tr><td style="color:#E8C070;font-weight:700">Đại Thừa / Độ Kiếp</td><td>100+</td><td>—</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
     <div class="info-section">
       <h3>Điều kiện đột phá</h3>
@@ -869,8 +975,6 @@ body.edit-mode .nav-add-badge { display:inline-block; }
       <h3 style="margin-top:14px">Tương Khắc</h3>
       <div class="info-text">Mộc khắc Thổ → Thổ khắc Thủy → Thủy khắc Hỏa → Hỏa khắc Kim → Kim khắc Mộc<br><span style="color:var(--text-3);font-size:11.5px">Hiệu ứng: Nhân vật kích hoạt nhận +5% Tăng Sát Nguyên Tố</span></div>
     </div>
-
-    <!-- Reaction filter -->
     <div style="margin-bottom:14px">
       <div style="font-size:10px;color:var(--text-4);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:700">Tìm theo hệ nguyên tố</div>
       <div class="reaction-filter-bar" id="reactionFilterBar">
@@ -888,7 +992,6 @@ body.edit-mode .nav-add-badge { display:inline-block; }
         <button class="filter-btn" data-re="Ám" onclick="setReactionFilter(this,'Ám')">Ám</button>
       </div>
     </div>
-
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <div style="font-size:10px;color:var(--text-4);letter-spacing:2px;text-transform:uppercase;font-weight:700">Danh sách phản ứng</div>
       <button class="add-btn hidden" id="addReactionBtn" onclick="openReactionModal()" style="margin:0;padding:5px 12px;font-size:11px">+ Thêm phản ứng</button>
@@ -951,7 +1054,7 @@ body.edit-mode .nav-add-badge { display:inline-block; }
 </div>
 
 <!-- PASS MODAL -->
-<div id="passModal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(30,18,5,.65);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+<div id="passModal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
   <div class="pass-box">
     <div class="pass-title">制御模式</div>
     <div class="pass-desc">Nhập mật khẩu để kích hoạt quyền chỉnh sửa nội dung</div>
@@ -963,6 +1066,21 @@ body.edit-mode .nav-add-badge { display:inline-block; }
 </div>
 
 <script>
+// ===== MOBILE SIDEBAR =====
+function toggleSidebar() {
+  const s = document.getElementById('sidebar');
+  const o = document.getElementById('sidebarOverlay');
+  const h = document.getElementById('hamburger');
+  s.classList.toggle('open');
+  o.classList.toggle('open');
+  h.classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
 // ===== WEAPON GROUPS =====
 const WEAPON_GROUPS = {
   'KIẾM': ['Kiếm đơn (Linh kiếm)','Kiếm đơn (Phi kiếm)','Trọng kiếm (Đại kiếm)','Song kiếm'],
@@ -1021,6 +1139,7 @@ function navigate(page) {
   };
   document.getElementById('topbarTitle').textContent = titles[page] || page;
   renderPage(page);
+  closeSidebar();
 }
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', () => navigate(item.dataset.page));
@@ -1107,9 +1226,9 @@ function previewUpload(id) {
 
 // ===== CHAR RENDER =====
 const elementColors = {
-  'Kim':'#8a8a8a','Mộc':'#2E6644','Thủy':'#2A5070','Hỏa':'#A03030',
-  'Thổ':'#7A5C2E','Phong':'#3E6B55','Lôi':'#6B4A9E','Băng':'#2A6070',
-  'Độc':'#4A6A1A','Ám':'#3A2060','Quang':'#9B6B1A'
+  'Kim':'#C0C0A0','Mộc':'#7AAA7A','Thủy':'#6AAAD4','Hỏa':'#E06060',
+  'Thổ':'#D4A85A','Phong':'#7ABB9A','Lôi':'#AA7AE4','Băng':'#7AC0D4',
+  'Độc':'#90BB5A','Ám':'#8060B0','Quang':'#E8C070'
 };
 
 function renderChars() {
@@ -1146,7 +1265,7 @@ function renderChars() {
     const tr = document.createElement('tr');
     tr.onclick = () => openCharDetail(c);
     tr.innerHTML = `<td><b>${c.name||'???'}</b>${c.title?` <span style="color:var(--text-3);font-size:11px;font-style:italic"> — ${c.title}</span>`:''}</td>
-    <td><span style="color:${c.stars==5?'#9B6B1A':'#6B4A9E'}">${stars}</span></td>
+    <td><span style="color:${c.stars==5?'#D4A82A':'#8060D0'}">${stars}</span></td>
     <td><span style="color:${col};font-weight:600">${c.element||'—'}</span></td>
     <td>${c.cultivation||'—'}</td><td>${c.weaponGroup?c.weaponGroup+(c.weaponSubtype?' / '+c.weaponSubtype:''):c.weaponSubtype||'—'}</td><td>${c.realm||'—'}</td><td>${c.patch||'—'}</td>`;
     tbody.appendChild(tr);
@@ -1445,7 +1564,7 @@ function openCharDetail(c) {
       <div class="char-detail-avatar">
         ${c.image?`<img src="${c.image}" alt="${c.name}">`:`<span class="placeholder-text">Chưa có ảnh</span>`}
       </div>
-      <div style="flex:1">
+      <div style="flex:1;min-width:0">
         <div class="char-detail-name">${c.name||'???'}</div>
         ${c.title?`<div class="char-detail-title">${c.title}</div>`:''}
         ${c.realName?`<div style="font-size:11.5px;color:var(--text-3);margin-top:2px">Tên thật: ${c.realName}</div>`:''}
@@ -1464,7 +1583,6 @@ function openCharDetail(c) {
       </div>
     </div>`;
 
-  // Basic info
   const basicFields = [
     ['Giới tính',c.gender],['Chủng tộc',c.race],['Gia tộc / Môn phái gốc',c.clan],
     ['Sư phụ / Tổ sư',c.master],['Thế giới / Đại lục',c.world],
@@ -1480,7 +1598,6 @@ function openCharDetail(c) {
     html+=`</div></div>`;
   }
 
-  // Stats
   const statFields=[['Sinh mệnh linh đài (HP)',c.hp],['Linh lực cơ bản (ATK)',c.atk],['Thể phách trấn áp (DEF)',c.def],
     ['Nguyên tinh thông (EM)',c.em],['Nạp linh lực (%)',c.energyRecharge],
     ['Tỷ lệ bạo kích',c.crit],['Sát thương bạo kích',c.cdmg],
@@ -1490,10 +1607,9 @@ function openCharDetail(c) {
   if(statFields.length){
     html+=`<div class="section-card"><div class="section-title">Chỉ số thuộc tính</div>`;
     statFields.forEach(([k,v])=>html+=`<div class="stat-row"><span class="stat-name">${k}</span><span class="stat-val">${v}</span></div>`);
-    html+=`<div style="font-size:11px;color:var(--text-4);margin-top:8px;font-style:italic">Chỉ số cơ bản tăng theo cảnh giới. Ngoài HP/ATK/DEF, mỗi nhân vật có 1 chỉ số phụ đặc trưng.</div></div>`;
+    html+=`<div style="font-size:11px;color:var(--text-4);margin-top:8px;font-style:italic">Chỉ số cơ bản tăng theo cảnh giới.</div></div>`;
   }
 
-  // Combat
   if(c.normalAtk||c.skillE||c.skillQ||c.passive1||c.passive2){
     html+=`<div class="section-card"><div class="section-title">Kỹ năng chiến đấu</div>`;
     if(c.normalAtk){
@@ -1528,7 +1644,6 @@ function openCharDetail(c) {
     html+=`</div>`;
   }
 
-  // Constellations
   const consts = [c.c1,c.c2,c.c3,c.c4,c.c5,c.c6].filter(Boolean);
   if(consts.length){
     html+=`<div class="section-card"><div class="section-title">Tinh tú đạo mạch (C1–C6)</div><div class="constellation-grid">`;
@@ -1539,7 +1654,6 @@ function openCharDetail(c) {
     html+=`</div></div>`;
   }
 
-  // Story of life
   if(c.mainStory||c.subStory1||c.storyArc||c.conflict||c.resolution){
     html+=`<div class="section-card"><div class="section-title">Câu chuyện cuộc đời</div>`;
     if(c.mainStory) html+=`<div class="story-block"><div class="story-block-title">Cốt truyện chính</div><div class="story-block-content">${c.mainStory.replace(/\n/g,'<br>')}</div></div>`;
@@ -1551,7 +1665,6 @@ function openCharDetail(c) {
     html+=`</div>`;
   }
 
-  // Personality & Background
   if(c.background||c.personality||c.goal||c.secret||c.worldview||c.likes||c.dislikes||c.fear||c.food){
     html+=`<div class="section-card"><div class="section-title">Lý lịch &amp; Cá tính</div>`;
     if(c.background) html+=`<div class="field-full"><div class="field-label">Xuất thân / Gia tộc</div><div class="field-value" style="margin-top:4px;line-height:1.8">${c.background.replace(/\n/g,'<br>')}</div></div>`;
@@ -1566,14 +1679,12 @@ function openCharDetail(c) {
     html+=`</div>`;
   }
 
-  // Relationships
   if(c.relationships||c.trusted||c.enemy) html+=`<div class="section-card"><div class="section-title">Tuyến quan hệ</div>
-    ${c.relationships?`<div class="field-full"><div class="field-label">Bảng quan hệ</div><div class="field-value" style="line-height:1.9;margin-top:4px">${c.relationships.replace(/\n/g,'<br>')}</div></div>`:''} 
+    ${c.relationships?`<div class="field-full"><div class="field-label">Bảng quan hệ</div><div class="field-value" style="line-height:1.9;margin-top:4px">${c.relationships.replace(/\n/g,'<br>')}</div></div>`:''}
     ${c.trusted?`<div class="field-full"><div class="field-label">Người tin tưởng nhất</div><div class="field-value">${c.trusted}</div></div>`:''}
     ${c.enemy?`<div class="field-full"><div class="field-label">Kẻ thù / Đối thủ truyền kiếp</div><div class="field-value">${c.enemy}</div></div>`:''}
     </div>`;
 
-  // Voice lines
   if(c.voiceGreet||c.voiceIntro||c.voiceJoin||c.voiceBreakthrough||c.voiceLowHP||c.voiceDefeated||c.voiceSkillE||c.voiceSkillQ||c.voiceCrit||c.voiceSelf||c.voiceWorld||c.voiceKey){
     html+=`<div class="section-card"><div class="section-title">Thoại đặc trưng</div>`;
     const vl = [
@@ -1588,7 +1699,6 @@ function openCharDetail(c) {
     html+=`</div>`;
   }
 
-  // Special ability + Ascension
   if(c.uniqueAbility||c.mat1||c.mat2||c.mat3||c.skillMat1||c.skillMat2||c.skillMat3){
     html+=`<div class="section-card"><div class="section-title">Thần thông &amp; Nguyên liệu</div>`;
     if(c.uniqueAbility) html+=`<div class="field-full"><div class="field-label">Thần thông bản mệnh: ${c.uniqueAbilityName||''}</div><div class="field-value" style="margin-top:4px">${c.uniqueAbility}</div></div>`;
@@ -1598,7 +1708,6 @@ function openCharDetail(c) {
     html+=`</div>`;
   }
 
-  // Notes
   if(c.notes) html+=`<div class="section-card"><div class="section-title">Ghi chú thiết kế</div><div class="field-value" style="line-height:1.8">${c.notes.replace(/\n/g,'<br>')}</div></div>`;
 
   document.getElementById('detailContent').innerHTML=html;
@@ -1780,7 +1889,7 @@ function openCharModal(edit) {
             <option value="">—</option>
             ${['Luyện Khí','Trúc Cơ','Kết Đan','Nguyên Anh','Hóa Thần','Luyện Hư','Đại Thừa','Độ Kiếp'].map(r=>`<option ${c.realm===r?'selected':''}>${r}</option>`).join('')}
           </select></div>
-        <div class="form-group"><label class="form-label">Chỉ số phụ đặc trưng (tăng theo cảnh giới)</label>
+        <div class="form-group"><label class="form-label">Chỉ số phụ đặc trưng</label>
           <select class="form-select" id="f_bonusStat">
             <option value="">—</option>
             ${['Nguyên tinh thông (EM)','Nạp linh lực (%)','Tỷ lệ bạo kích (CRIT%)','Sát thương bạo kích (CDMG%)','HP%','ATK%','DEF%'].map(r=>`<option ${c.bonusStat===r?'selected':''}>${r}</option>`).join('')}
@@ -1795,7 +1904,7 @@ function openCharModal(edit) {
         <div class="form-group"><label class="form-label">Tỷ lệ bạo kích</label><input class="form-input" id="f_crit" placeholder="5%" value="${c.crit||''}"></div>
         <div class="form-group"><label class="form-label">Sát thương bạo kích</label><input class="form-input" id="f_cdmg" placeholder="50%" value="${c.cdmg||''}"></div>
         <div class="form-group"><label class="form-label">Tăng sát thương hệ (%)</label><input class="form-input" id="f_eleDmg" value="${c.eleDmg||''}"></div>
-        <div class="form-group"><label class="form-label">Tốc độ tụ linh / Tốc công</label><input class="form-input" id="f_atkSpeed" value="${c.atkSpeed||''}"></div>
+        <div class="form-group"><label class="form-label">Tốc công</label><input class="form-input" id="f_atkSpeed" value="${c.atkSpeed||''}"></div>
         <div class="form-group"><label class="form-label">Kháng nguyên tố (%)</label><input class="form-input" id="f_eleRes" value="${c.eleRes||''}"></div>
         <div class="form-group"><label class="form-label">Thấu linh / Xuyên phòng (%)</label><input class="form-input" id="f_penetrate" value="${c.penetrate||''}"></div>
         <div class="form-group"><label class="form-label">Chỉ số chữa lành (%)</label><input class="form-input" id="f_heal" value="${c.heal||''}"></div>
@@ -2168,7 +2277,6 @@ function showToast(msg, type='info'){
 
 // ===== INIT =====
 if(window.__EXPORT_DB__){DB=window.__EXPORT_DB__;save();}
-// Migrate old DB
 if(localStorage.getItem('tiengioi_db_v2')){
   const old=JSON.parse(localStorage.getItem('tiengioi_db_v2'));
   if(old && !DB.characters.length) {
